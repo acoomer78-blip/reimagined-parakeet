@@ -1,0 +1,5795 @@
+{
+"openapi": "3.0.4",
+"info": {
+"title": "v1 APIs",
+"version": "v1"
+},
+"tags": [
+{
+"name": "analytics",
+"x-displayName": "Reporting"
+},
+{
+"name": "audit-events",
+"x-displayName": "Audit events"
+},
+{
+"name": "content",
+"x-displayName": "Content"
+},
+{
+"name": "knowledge",
+"x-displayName": "Knowledge"
+},
+{
+"name": "oauth-applications",
+"x-displayName": "OAuth Applications"
+},
+{
+"name": "users",
+"x-displayName": "Users"
+}
+],
+"paths": {
+"/v1/analytics/active-users": {
+"get": {
+"tags": [
+"analytics"
+],
+"summary": "Active users",
+"operationId": "GetActiveUsers",
+"parameters": [
+{
+"name": "from",
+"in": "query",
+"description": "The first date in the reporting range in yyyy-MM-dd format, for example 2026-01-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-01-01"
+},
+"example": "2026-01-01"
+},
+{
+"name": "to",
+"in": "query",
+"description": "The last date in the reporting range in yyyy-MM-dd format, for example 2026-08-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-08-01"
+},
+"example": "2026-08-01"
+},
+{
+"name": "interval",
+"in": "query",
+"description": "Indicate how the results will be aggregated, by day, week or month.",
+"schema": {
+"$ref": "#/components/schemas/DateRangeInterval"
+},
+"example": "month"
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ActiveUsersResponse"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ActiveUsersResponse"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ActiveUsersResponse"
+}
+}
+}
+},
+"403": {
+"description": "Forbidden",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"404": {
+"description": "Not Found",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"422": {
+"description": "Unprocessable Content",
+"content": {
+"application/problem+json": {
+"schema": {
+"$ref": "#/components/schemas/ReportValidationProblemDetails"
+}
+}
+}
+},
+"503": {
+"description": "Service Unavailable"
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"identity": []
+}
+]
+}
+},
+"/v1/analytics/answer-engagement": {
+"get": {
+"tags": [
+"analytics"
+],
+"summary": "Answer engagement",
+"description": "Returns daily, weekly, or monthly answer engagement. Weekly and monthly partial periods expose
+partial-to-date values and set isPartialPeriod to true; daily periods set it to false.",
+"operationId": "GetAnswerEngagement",
+"parameters": [
+{
+"name": "from",
+"in": "query",
+"description": "The first date in the reporting range in yyyy-MM-dd format, for example 2026-01-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-01-01"
+},
+"example": "2026-01-01"
+},
+{
+"name": "to",
+"in": "query",
+"description": "The last date in the reporting range in yyyy-MM-dd format, for example 2026-08-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-08-01"
+},
+"example": "2026-08-01"
+},
+{
+"name": "interval",
+"in": "query",
+"description": "Indicate how the results will be aggregated, by day, week or month.",
+"schema": {
+"$ref": "#/components/schemas/DateRangeInterval"
+},
+"example": "month"
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/AnswerEngagementResponse"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/AnswerEngagementResponse"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/AnswerEngagementResponse"
+}
+}
+}
+},
+"403": {
+"description": "Forbidden",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"404": {
+"description": "Not Found",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"422": {
+"description": "Unprocessable Content",
+"content": {
+"application/problem+json": {
+"schema": {
+"$ref": "#/components/schemas/ReportValidationProblemDetails"
+}
+}
+}
+},
+"503": {
+"description": "Service Unavailable"
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"identity": []
+}
+]
+}
+},
+"/v1/analytics/helpful-answer-rate": {
+"get": {
+"tags": [
+"analytics"
+],
+"summary": "Helpful answer rate",
+"operationId": "GetHelpfulAnswerRate",
+"parameters": [
+{
+"name": "from",
+"in": "query",
+"description": "The first date in the reporting range in yyyy-MM-dd format, for example 2026-01-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-01-01"
+},
+"example": "2026-01-01"
+},
+{
+"name": "to",
+"in": "query",
+"description": "The last date in the reporting range in yyyy-MM-dd format, for example 2026-08-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-08-01"
+},
+"example": "2026-08-01"
+},
+{
+"name": "interval",
+"in": "query",
+"description": "Indicate how the results will be aggregated, by day, week or month.",
+"schema": {
+"$ref": "#/components/schemas/DateRangeInterval"
+},
+"example": "month"
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/HelpfulAnswerRateResponse"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/HelpfulAnswerRateResponse"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/HelpfulAnswerRateResponse"
+}
+}
+}
+},
+"403": {
+"description": "Forbidden",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"404": {
+"description": "Not Found",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"422": {
+"description": "Unprocessable Content",
+"content": {
+"application/problem+json": {
+"schema": {
+"$ref": "#/components/schemas/ReportValidationProblemDetails"
+}
+}
+}
+},
+"503": {
+"description": "Service Unavailable"
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"identity": []
+}
+]
+}
+},
+"/v1/analytics/knowledge-credits-usage": {
+"get": {
+"tags": [
+"analytics"
+],
+"summary": "Knowledge credits usage",
+"description": "Returns decimal credits summed by action: chatResponses (response_returned), mcpCredits (mcp_search),
+and apiCredits (api_search), with period and range totalCredits. Missing categories and periods are zero; unknown
+actions are excluded. Weekly and monthly ranges expand to complete UTC calendar periods. Weekly and monthly partial
+periods expose partial-to-date values and set isPartialPeriod to true; daily periods set it to false.",
+"operationId": "GetKnowledgeCreditsUsage",
+"parameters": [
+{
+"name": "from",
+"in": "query",
+"description": "The first date in the reporting range in yyyy-MM-dd format, for example 2026-01-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-01-01"
+},
+"example": "2026-01-01"
+},
+{
+"name": "to",
+"in": "query",
+"description": "The last date in the reporting range in yyyy-MM-dd format, for example 2026-08-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-08-01"
+},
+"example": "2026-08-01"
+},
+{
+"name": "interval",
+"in": "query",
+"description": "Indicate how the results will be aggregated, by day, week or month.",
+"schema": {
+"$ref": "#/components/schemas/DateRangeInterval"
+},
+"example": "month"
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/KnowledgeCreditsUsageResponse"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/KnowledgeCreditsUsageResponse"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/KnowledgeCreditsUsageResponse"
+}
+}
+}
+},
+"401": {
+"description": "Unauthorized",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"403": {
+"description": "Forbidden",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"404": {
+"description": "Not Found",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"422": {
+"description": "Unprocessable Content",
+"content": {
+"application/problem+json": {
+"schema": {
+"$ref": "#/components/schemas/ReportValidationProblemDetails"
+}
+}
+}
+},
+"503": {
+"description": "Service Unavailable"
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"identity": []
+}
+]
+}
+},
+"/v1/analytics/most-active-users": {
+"get": {
+"tags": [
+"analytics"
+],
+"summary": "Most active users",
+"operationId": "GetMostActiveUsers",
+"parameters": [
+{
+"name": "from",
+"in": "query",
+"description": "The first date in the reporting range in yyyy-MM-dd format, for example 2026-01-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-01-01"
+},
+"example": "2026-01-01"
+},
+{
+"name": "to",
+"in": "query",
+"description": "The last date in the reporting range in yyyy-MM-dd format, for example 2026-08-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-08-01"
+},
+"example": "2026-08-01"
+},
+{
+"name": "interval",
+"in": "query",
+"description": "Indicate how the results will be aggregated, by day, week or month.",
+"schema": {
+"$ref": "#/components/schemas/DateRangeInterval"
+},
+"example": "month"
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/MostActiveUsersResponse"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MostActiveUsersResponse"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/MostActiveUsersResponse"
+}
+}
+}
+},
+"403": {
+"description": "Forbidden",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"404": {
+"description": "Not Found",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"422": {
+"description": "Unprocessable Content",
+"content": {
+"application/problem+json": {
+"schema": {
+"$ref": "#/components/schemas/ReportValidationProblemDetails"
+}
+}
+}
+},
+"503": {
+"description": "Service Unavailable"
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"identity": []
+}
+]
+}
+},
+"/v1/analytics/questions-submitted": {
+"get": {
+"tags": [
+"analytics"
+],
+"summary": "Questions asked",
+"operationId": "GetQuestionsSubmittedMonthly",
+"parameters": [
+{
+"name": "from",
+"in": "query",
+"description": "The first date in the reporting range in yyyy-MM-dd format, for example 2026-01-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-01-01"
+},
+"example": "2026-01-01"
+},
+{
+"name": "to",
+"in": "query",
+"description": "The last date in the reporting range in yyyy-MM-dd format, for example 2026-08-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-08-01"
+},
+"example": "2026-08-01"
+},
+{
+"name": "interval",
+"in": "query",
+"description": "Indicate how the results will be aggregated, by day, week or month.",
+"schema": {
+"$ref": "#/components/schemas/DateRangeInterval"
+},
+"example": "month"
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/QuestionsSubmittedResponse"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/QuestionsSubmittedResponse"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/QuestionsSubmittedResponse"
+}
+}
+}
+},
+"403": {
+"description": "Forbidden",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"404": {
+"description": "Not Found",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"422": {
+"description": "Unprocessable Content",
+"content": {
+"application/problem+json": {
+"schema": {
+"$ref": "#/components/schemas/ReportValidationProblemDetails"
+}
+}
+}
+},
+"503": {
+"description": "Service Unavailable"
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"identity": []
+}
+]
+}
+},
+"/v1/analytics/searchable-knowledge": {
+"get": {
+"tags": [
+"analytics"
+],
+"summary": "Searchable knowledge created",
+"operationId": "GetSearchableKnowledge",
+"parameters": [
+{
+"name": "from",
+"in": "query",
+"description": "The first date in the reporting range in yyyy-MM-dd format, for example 2026-01-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-01-01"
+},
+"example": "2026-01-01"
+},
+{
+"name": "to",
+"in": "query",
+"description": "The last date in the reporting range in yyyy-MM-dd format, for example 2026-08-01.",
+"required": true,
+"schema": {
+"type": "string",
+"example": "2026-08-01"
+},
+"example": "2026-08-01"
+},
+{
+"name": "interval",
+"in": "query",
+"description": "Indicate how the results will be aggregated, by day, week or month.",
+"schema": {
+"$ref": "#/components/schemas/DateRangeInterval"
+},
+"example": "month"
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/SearchableKnowledgeResponse"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SearchableKnowledgeResponse"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/SearchableKnowledgeResponse"
+}
+}
+}
+},
+"403": {
+"description": "Forbidden",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"404": {
+"description": "Not Found",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"422": {
+"description": "Unprocessable Content",
+"content": {
+"application/problem+json": {
+"schema": {
+"$ref": "#/components/schemas/ReportValidationProblemDetails"
+}
+}
+}
+},
+"503": {
+"description": "Service Unavailable"
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"identity": []
+}
+]
+}
+},
+"/v1/audit-events": {
+"get": {
+"tags": [
+"audit-events"
+],
+"summary": "Download audit events as CSV.",
+"description": "Streams every matching event for the authenticated tenant within the audit log retention period.\nEvents
+are newest first. The optional q, actorIds, eventTypes, fromUtc, and toUtc parameters filter the download.\nDates are
+UTC calendar dates; both requested bounds are inclusive. The response is not paged.",
+"operationId": "DownloadAuditEventsCsv",
+"parameters": [
+{
+"name": "q",
+"in": "query",
+"description": "Search displayed audit event details.",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "actorIds",
+"in": "query",
+"description": "Filter by actor ID. Repeat this parameter or separate IDs with commas.",
+"schema": {
+"type": "array",
+"items": {
+"type": "string"
+}
+}
+},
+{
+"name": "eventTypes",
+"in": "query",
+"description": "Filter by event type. Repeat this parameter or separate types with commas.",
+"schema": {
+"type": "array",
+"items": {
+"type": "string"
+}
+}
+},
+{
+"name": "fromUtc",
+"in": "query",
+"description": "Inclusive start date in UTC (YYYY-MM-DD).",
+"schema": {
+"type": "string",
+"format": "date"
+}
+},
+{
+"name": "toUtc",
+"in": "query",
+"description": "Inclusive end date in UTC (YYYY-MM-DD).",
+"schema": {
+"type": "string",
+"format": "date"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/csv": {
+"schema": {
+"type": "string",
+"format": "binary"
+}
+}
+}
+},
+"400": {
+"description": "Bad Request",
+"content": {
+"application/problem+json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"401": {
+"description": "Unauthorized",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"403": {
+"description": "Forbidden",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"422": {
+"description": "Unprocessable Content",
+"content": {
+"application/problem+json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"500": {
+"description": "Internal Server Error",
+"content": {
+"application/problem+json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+},
+"504": {
+"description": "Gateway Timeout",
+"content": {
+"application/problem+json": {
+"schema": {
+"$ref": "#/components/schemas/ProblemDetails"
+}
+}
+}
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"identity": []
+}
+]
+}
+},
+"/v1/content/acl-grant-memberships": {
+"put": {
+"tags": [
+"content"
+],
+"summary": "Synchronizes the current member set for one or more ACL grants owned by a registered API source.",
+"operationId": "synchronizeAclGrantMemberships",
+"requestBody": {
+"description": "The source, observed timestamp, and full member sets for the ACL grants to replace.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PutAclGrantMembershipsV3Request"
+},
+"examples": {
+"aclGrantMembershipSyncRequest": {
+"summary": "ACL grant membership synchronization request",
+"description": "Replaces the current member sets for the supplied ACL grants.",
+"value": {
+"source": "slack-export",
+"observedAt": "2026-09-14T12:34:56+00:00",
+"grants": [
+{
+"acl": {
+"kind": "group",
+"provider": "slack",
+"identifier": "C123"
+},
+"members": [
+{
+"provider": "slack",
+"identifier": "U111"
+},
+{
+"provider": "slack",
+"identifier": "U222"
+}
+]
+}
+]
+}
+}
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/PutAclGrantMembershipsV3Request"
+}
+},
+"application/*+json": {
+"schema": {
+"$ref": "#/components/schemas/PutAclGrantMembershipsV3Request"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PutAclGrantMembershipsV3Response"
+},
+"examples": {
+"aclGrantMembershipsSynchronized": {
+"summary": "ACL grant membership synchronization response",
+"description": "Returns the synthetic run id and per-grant grant and revoke counts.",
+"value": {
+"runId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+"results": [
+{
+"acl": {
+"kind": "group",
+"provider": "slack",
+"identifier": "C123"
+},
+"observedAt": "2026-09-14T12:34:56+00:00",
+"grantedCount": 2,
+"revokedCount": 0,
+"grantedChangeSetId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+"revokedChangeSetId": null
+}
+]
+}
+}
+}
+}
+}
+},
+"400": {
+"description": "Bad Request",
+"content": {
+"application/json": {
+"schema": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ProblemDetails"
+},
+{
+"$ref": "#/components/schemas/HttpValidationProblemDetails"
+}
+]
+},
+"examples": {
+"invalidAclGrantMembershipRequest": {
+"summary": "Invalid ACL grant membership request",
+"description": "Returns when the request payload fails validation.",
+"value": {
+"type": "https://httpstatuses.io/400",
+"title": "Invalid ACL grant membership request",
+"status": 400,
+"detail": "Grants[0].Acl.Provider Provider must contain only lowercase letters, digits, and hyphens."
+}
+}
+}
+}
+}
+},
+"409": {
+"description": "Conflict",
+"content": {
+"application/json": {
+"schema": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ProblemDetails"
+},
+{
+"$ref": "#/components/schemas/HttpValidationProblemDetails"
+}
+]
+},
+"examples": {
+"staleAclGrantMembershipRequest": {
+"summary": "Stale ACL grant membership request",
+"description": "Returns when the supplied observedAt is older than the stored observation for a grant.",
+"value": {
+"type": "https://httpstatuses.io/409",
+"title": "Stale ACL grant membership request",
+"status": 409,
+"detail": "ACL grant membership snapshot for 'group/slack/C123' is stale. Stored lastObservedAt
+'2026-09-14T12:35:56.0000000+00:00' is newer than or conflicts with observedAt '2026-09-14T12:34:56.0000000+00:00'."
+}
+}
+}
+}
+}
+}
+},
+"security": [
+{
+"identity": []
+},
+{
+"bearerAuth": []
+}
+],
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+]
+}
+},
+"/v1/content": {
+"post": {
+"tags": [
+"content"
+],
+"summary": "Creates a new content record for the authenticated tenant from a Dimension Registry archetype payload.",
+"operationId": "createContent",
+"requestBody": {
+"description": "The source metadata, access control list, and archetype payload to store.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/InsertContentV3Request"
+},
+"examples": {
+"documentArchetypeRequest": {
+"summary": "Document archetype request",
+"description": "Creates one content record for a markdown document with a group ACL.",
+"value": {
+"source": "github",
+"sourceId": "repo:octo-org/octo-repo/markdown-file:docs/README.md",
+"sourceUri": "https://github.com/octo-org/octo-repo/blob/main/docs/README.md",
+"acls": [
+{
+"kind": "group",
+"provider": "entra",
+"identifier": "engineering-all"
+}
+],
+"entityType": "markdown-file",
+"data": {
+"representation": "archetype",
+"representationVersion": 1,
+"archetype": "document",
+"dataSchema": "com.stackoverflow.stackinternal.content.archetype.document.v1",
+"data": {
+"title": "README",
+"textContent": "# Hello\nThis is markdown.",
+"documentType": "markdown_file",
+"personaRefs": [
+"42"
+],
+"containerRef": "repo:octo-org/octo-repo",
+"sourceUri": "https://github.com/octo-org/octo-repo/blob/main/docs/README.md",
+"mimeType": "text/markdown",
+"sourceVersion": "blob-sha-1"
+}
+},
+"hierarchy": "github://octo-org/octo-repo",
+"hierarchySegments": [
+{
+"id": "octo-org",
+"displayName": "Octo Org"
+},
+{
+"id": "octo-repo",
+"displayName": "Octo Repo"
+}
+]
+}
+}
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/InsertContentV3Request"
+}
+},
+"application/*+json": {
+"schema": {
+"$ref": "#/components/schemas/InsertContentV3Request"
+}
+}
+}
+},
+"responses": {
+"201": {
+"description": "Created",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/InsertContentV3Response"
+},
+"examples": {
+"contentCreated": {
+"summary": "Created content response",
+"description": "Returns the identifier of the stored content version that was created.",
+"value": {
+"contentId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+}
+}
+}
+}
+}
+},
+"400": {
+"description": "Bad Request",
+"content": {
+"application/json": {
+"schema": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ProblemDetails"
+},
+{
+"$ref": "#/components/schemas/HttpValidationProblemDetails"
+}
+]
+},
+"examples": {
+"invalidSchema": {
+"summary": "Invalid schema response",
+"description": "Returns when the archetype payload does not satisfy the supplied Dimension Registry schema.",
+"value": {
+"type": "https://httpstatuses.io/400",
+"title": "Invalid content request",
+"status": 400,
+"detail": "Dimension Registry schema 'com.stackoverflow.stackinternal.content.archetype.document.v1' rejected
+$.data.createdAt because the value must be a valid date-time string."
+}
+}
+}
+}
+}
+},
+"402": {
+"description": "Payment Required",
+"content": {
+"application/json": {
+"schema": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ProblemDetails"
+},
+{
+"$ref": "#/components/schemas/HttpValidationProblemDetails"
+}
+]
+},
+"examples": {
+"usageCreditsExhausted": {
+"summary": "Usage credits exhausted response",
+"description": "Returns when a starter tenant has exhausted usage credits and is not on the override allow-list.",
+"value": {
+"type": "https://httpstatuses.io/402",
+"title": "Payment Required",
+"status": 402,
+"detail": "usage_credits_exhausted"
+}
+}
+}
+}
+}
+},
+"409": {
+"description": "Conflict",
+"content": {
+"application/json": {
+"schema": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ProblemDetails"
+},
+{
+"$ref": "#/components/schemas/HttpValidationProblemDetails"
+}
+]
+},
+"examples": {
+"contentAlreadyExists": {
+"summary": "Duplicate content response",
+"description": "Returns when a tenant already has content with the same source and sourceId.",
+"value": {
+"type": "https://httpstatuses.io/409",
+"title": "Content already exists",
+"status": 409,
+"detail": "Content with source 'github' and sourceId 'repo:octo-org/octo-repo/markdown-file:docs/README.md' already
+exists."
+}
+}
+}
+}
+}
+}
+},
+"security": [
+{
+"identity": []
+},
+{
+"bearerAuth": []
+}
+],
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+]
+}
+},
+"/v1/content/{id}": {
+"put": {
+"tags": [
+"content"
+],
+"summary": "Updates an existing content record for the authenticated tenant from a Dimension Registry archetype
+payload.",
+"operationId": "updateContent",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"description": "The unique identifier for the stored content version to update.",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"description": "The updated access control list and archetype payload to store.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateContentV3Request"
+},
+"examples": {
+"documentArchetypeUpdateRequest": {
+"summary": "Document archetype update request",
+"description": "Updates an existing content record when the latest stored fingerprint differs.",
+"value": {
+"sourceUri": "https://github.com/octo-org/octo-repo/blob/main/docs/README.md",
+"acls": [
+{
+"kind": "group",
+"provider": "entra",
+"identifier": "engineering-all"
+}
+],
+"entityType": "markdown-file",
+"data": {
+"representation": "archetype",
+"representationVersion": 1,
+"archetype": "document",
+"dataSchema": "com.stackoverflow.stackinternal.content.archetype.document.v1",
+"data": {
+"title": "README",
+"textContent": "# Hello\nThis is updated markdown.",
+"documentType": "markdown_file",
+"personaRefs": [
+"42"
+],
+"containerRef": "repo:octo-org/octo-repo",
+"sourceUri": "https://github.com/octo-org/octo-repo/blob/main/docs/README.md",
+"mimeType": "text/markdown",
+"sourceVersion": "blob-sha-2"
+}
+},
+"hierarchy": "github://octo-org/octo-repo",
+"hierarchySegments": [
+{
+"id": "octo-org",
+"displayName": "Octo Org"
+},
+{
+"id": "octo-repo",
+"displayName": "Octo Repo"
+}
+]
+}
+}
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateContentV3Request"
+}
+},
+"application/*+json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateContentV3Request"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/InsertContentV3Response"
+},
+"examples": {
+"contentUpdated": {
+"summary": "Updated content response",
+"description": "Returns the identifier of the newly stored content version.",
+"value": {
+"contentId": "dddddddd-dddd-dddd-dddd-dddddddddddd"
+}
+}
+}
+}
+}
+},
+"204": {
+"description": "Returns when the incoming content fingerprint matches the latest stored version, so no new content
+version is created."
+},
+"400": {
+"description": "Bad Request",
+"content": {
+"application/json": {
+"schema": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ProblemDetails"
+},
+{
+"$ref": "#/components/schemas/HttpValidationProblemDetails"
+}
+]
+},
+"examples": {
+"invalidSchema": {
+"summary": "Invalid schema response",
+"description": "Returns when the archetype payload does not satisfy the supplied Dimension Registry schema.",
+"value": {
+"type": "https://httpstatuses.io/400",
+"title": "Invalid content request",
+"status": 400,
+"detail": "Dimension Registry schema 'com.stackoverflow.stackinternal.content.archetype.document.v1' rejected
+$.data.createdAt because the value must be a valid date-time string."
+}
+}
+}
+}
+}
+},
+"402": {
+"description": "Payment Required",
+"content": {
+"application/json": {
+"schema": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ProblemDetails"
+},
+{
+"$ref": "#/components/schemas/HttpValidationProblemDetails"
+}
+]
+},
+"examples": {
+"usageCreditsExhausted": {
+"summary": "Usage credits exhausted response",
+"description": "Returns when a starter tenant has exhausted usage credits and is not on the override allow-list.",
+"value": {
+"type": "https://httpstatuses.io/402",
+"title": "Payment Required",
+"status": 402,
+"detail": "usage_credits_exhausted"
+}
+}
+}
+}
+}
+},
+"404": {
+"description": "Not Found",
+"content": {
+"application/json": {
+"schema": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ProblemDetails"
+},
+{
+"$ref": "#/components/schemas/HttpValidationProblemDetails"
+}
+]
+},
+"examples": {
+"contentNotFound": {
+"summary": "Missing content response",
+"description": "Returns when the supplied content identifier does not exist for the tenant.",
+"value": {
+"type": "https://httpstatuses.io/404",
+"title": "Content not found",
+"status": 404,
+"detail": "Content with id aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa not found."
+}
+}
+}
+}
+}
+}
+},
+"security": [
+{
+"identity": []
+},
+{
+"bearerAuth": []
+}
+],
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+]
+},
+"delete": {
+"tags": [
+"content"
+],
+"summary": "Deletes an existing content record for the authenticated tenant.",
+"operationId": "deleteContent",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"description": "The unique identifier for the stored content version to delete.",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"204": {
+"description": "Returns when the content exists and is deleted."
+},
+"400": {
+"description": "Bad Request",
+"content": {
+"application/json": {
+"schema": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ProblemDetails"
+},
+{
+"$ref": "#/components/schemas/HttpValidationProblemDetails"
+}
+]
+}
+}
+}
+},
+"404": {
+"description": "Not Found",
+"content": {
+"application/json": {
+"schema": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ProblemDetails"
+},
+{
+"$ref": "#/components/schemas/HttpValidationProblemDetails"
+}
+]
+},
+"examples": {
+"contentNotFound": {
+"summary": "Missing content response",
+"description": "Returns when the supplied content identifier does not exist for the tenant.",
+"value": {
+"type": "https://httpstatuses.io/404",
+"title": "Content not found",
+"status": 404,
+"detail": "Content with id aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa not found."
+}
+}
+}
+}
+}
+}
+},
+"security": [
+{
+"identity": []
+},
+{
+"bearerAuth": []
+}
+],
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+]
+}
+},
+"/v1/knowledge/nodes": {
+"post": {
+"operationId": "v1-get-knowledge-nodes-by-ids",
+"tags": [
+"knowledge"
+],
+"summary": "Retrieve knowledge nodes by ID.",
+"description": "Retrieve persisted knowledge nodes by their unique node IDs. Missing IDs are omitted from the
+response.",
+"security": [
+{
+"identity": []
+},
+{
+"bearerAuth": []
+}
+],
+"requestBody": {
+"description": "The node IDs to retrieve.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/GetNodesByIdsRequest"
+},
+"example": {
+"nodeIds": [
+"9588aca8-8995-4c14-a11f-fb442f2bc67c",
+"bd1d2fa1-5169-42c3-bb42-3c020b56417f"
+]
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "Success.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/GetNodesByIdsResponse"
+}
+}
+}
+},
+"400": {
+"description": "Bad Request",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/knowledge.ProblemDetails"
+}
+}
+}
+},
+"default": {
+"description": "Error.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/knowledge.ProblemDetails"
+}
+}
+}
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+]
+}
+},
+"/v1/knowledge/nodes/{nodeId}": {
+"get": {
+"operationId": "v1-get-knowledge-node-by-id",
+"tags": [
+"knowledge"
+],
+"summary": "Retrieve a knowledge node by ID.",
+"description": "Retrieve a persisted knowledge node by its unique node ID.",
+"security": [
+{
+"identity": []
+},
+{
+"bearerAuth": []
+}
+],
+"parameters": [
+{
+"description": "The node ID of the node to retrieve",
+"name": "nodeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+},
+"allowEmptyValue": false,
+"example": "9588aca8-8995-4c14-a11f-fb442f2bc67c"
+}
+],
+"responses": {
+"200": {
+"description": "Success.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/Node"
+}
+}
+}
+},
+"404": {
+"description": "Not Found",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/knowledge.ProblemDetails"
+}
+}
+}
+},
+"default": {
+"description": "Error.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/knowledge.ProblemDetails"
+}
+}
+}
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+]
+}
+},
+"/v1/knowledge/search": {
+"post": {
+"operationId": "v1-post-knowledge-search",
+"tags": [
+"knowledge"
+],
+"summary": "Search indexed knowledge nodes.",
+"description": "Search persisted knowledge nodes with the selected algorithm. Results are ranked by relevance and
+exclude deleted nodes.",
+"security": [
+{
+"identity": []
+},
+{
+"bearerAuth": []
+}
+],
+"requestBody": {
+"description": "The search request.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SearchRequest"
+},
+"example": {
+"query": "SSO troubleshooting",
+"algorithm": "hybrid_v1",
+"limit": 10,
+"scopeIds": [
+"4d8f3d4b-4e9f-48bc-89a0-cfbcf8a60df3"
+]
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "Success.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SearchResponse"
+}
+}
+}
+},
+"402": {
+"description": "Payment Required",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/knowledge.ProblemDetails"
+}
+}
+}
+},
+"default": {
+"description": "Error.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/knowledge.ProblemDetails"
+}
+}
+}
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+]
+}
+},
+"/v1/oauth-applications": {
+"get": {
+"tags": [
+"oauth-applications"
+],
+"summary": "List registered OAuth applications.",
+"description": "Paginated. Sort by client ID, name, redirect URIs, or scopes.",
+"operationId": "OAuthApplications_List",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 1
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 20
+}
+},
+{
+"name": "sort",
+"in": "query",
+"description": "Fields the OAuth application list can be sorted by.",
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationSortField"
+}
+},
+{
+"name": "direction",
+"in": "query",
+"description": "Sort order: ascending or descending.",
+"schema": {
+"$ref": "#/components/schemas/SortDirection"
+}
+},
+{
+"name": "scopes",
+"in": "query",
+"description": "Optional scope filter, repeatable. Returns applications requesting <em>any</em> of the\ngiven scopes;
+matching is case-insensitive. Omit to return all applications.",
+"schema": {
+"type": "array",
+"items": {
+"type": "string"
+}
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationsListResponse"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationsListResponse"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationsListResponse"
+}
+}
+}
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"oauth2": []
+}
+]
+},
+"post": {
+"tags": [
+"oauth-applications"
+],
+"summary": "Register a new OAuth application.",
+"description": "Returns the created application, including its generated client ID. Requested scopes are\nvalidated
+against the scope catalogue and the call is rejected if any is unknown.",
+"operationId": "OAuthApplications_Create",
+"requestBody": {
+"description": "Name, optional description, redirect URIs, and requested scopes.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationRequest"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationRequest"
+}
+},
+"application/*+json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationRequest"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationResponse"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationResponse"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationResponse"
+}
+}
+}
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"oauth2": []
+}
+]
+}
+},
+"/v1/oauth-applications/scope-options": {
+"get": {
+"tags": [
+"oauth-applications"
+],
+"summary": "List the scopes an OAuth application can request.",
+"operationId": "OAuthApplications_ScopeOptions",
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/plain": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/OAuthApplicationScopeOptionResponse"
+}
+}
+},
+"application/json": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/OAuthApplicationScopeOptionResponse"
+}
+}
+},
+"text/json": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/OAuthApplicationScopeOptionResponse"
+}
+}
+}
+}
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"oauth2": []
+}
+]
+}
+},
+"/v1/oauth-applications/{applicationId}": {
+"get": {
+"tags": [
+"oauth-applications"
+],
+"summary": "Retrieve a single OAuth application.",
+"description": "Returns the application's full configuration: client ID, name, description, redirect URIs,\nscopes, and
+its creation and last-updated timestamps.",
+"operationId": "OAuthApplications_Get",
+"parameters": [
+{
+"name": "applicationId",
+"in": "path",
+"description": "The application's identifier, as returned by the list endpoint.",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationResponse"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationResponse"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationResponse"
+}
+}
+}
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"oauth2": []
+}
+]
+},
+"put": {
+"tags": [
+"oauth-applications"
+],
+"summary": "Update an OAuth application's configuration.",
+"description": "A full replacement, not a patch: name, description, redirect URIs, and scopes are all\noverwritten with
+the request values. Scopes are validated as they are on create.",
+"operationId": "OAuthApplications_Update",
+"parameters": [
+{
+"name": "applicationId",
+"in": "path",
+"description": "The application's identifier, as returned by the list endpoint.",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"description": "The complete replacement definition for the application.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationRequest"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationRequest"
+}
+},
+"application/*+json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationRequest"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationResponse"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationResponse"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/OAuthApplicationResponse"
+}
+}
+}
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"oauth2": []
+}
+]
+},
+"delete": {
+"tags": [
+"oauth-applications"
+],
+"summary": "Delete an OAuth application.",
+"description": "Responds `204 No Content` on success.",
+"operationId": "OAuthApplications_Delete",
+"parameters": [
+{
+"name": "applicationId",
+"in": "path",
+"description": "The application's identifier, as returned by the list endpoint.",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"oauth2": []
+}
+]
+}
+},
+"/v1/users/search": {
+"post": {
+"tags": [
+"users"
+],
+"summary": "Search workspace members.",
+"description": "Paginated. Supports a text filter (`q`, matched against name and email), exact\n`role`, `status`, and
+`userIds` filters, and sorting by name (first + last),\nemail, or role.",
+"operationId": "Users_Search",
+"requestBody": {
+"description": "The optional filters, sorting, and pagination settings.",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UserSearchRequest"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/UserSearchRequest"
+}
+},
+"application/*+json": {
+"schema": {
+"$ref": "#/components/schemas/UserSearchRequest"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/plain": {
+"schema": {
+"$ref": "#/components/schemas/UserListItemResponsePagedResult"
+}
+},
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UserListItemResponsePagedResult"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/UserListItemResponsePagedResult"
+}
+}
+}
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"oauth2": []
+}
+]
+}
+},
+"/v1/users/{userId}/role": {
+"put": {
+"tags": [
+"users"
+],
+"summary": "Update a workspace member's role.",
+"operationId": "Users_ChangeRole",
+"parameters": [
+{
+"name": "userId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ChangeUserRoleRequest"
+}
+},
+"text/json": {
+"schema": {
+"$ref": "#/components/schemas/ChangeUserRoleRequest"
+}
+},
+"application/*+json": {
+"schema": {
+"$ref": "#/components/schemas/ChangeUserRoleRequest"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"oauth2": []
+}
+]
+}
+},
+"/v1/users/{userId}/deactivate": {
+"post": {
+"tags": [
+"users"
+],
+"summary": "Deactivate a workspace member.",
+"operationId": "Users_Deactivate",
+"parameters": [
+{
+"name": "userId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"oauth2": []
+}
+]
+}
+},
+"/v1/users/{userId}/activate": {
+"post": {
+"tags": [
+"users"
+],
+"summary": "Activate a workspace member.",
+"operationId": "Users_Activate",
+"parameters": [
+{
+"name": "userId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"servers": [
+{
+"url": "https://api.stackinternal.com"
+}
+],
+"security": [
+{
+"oauth2": []
+}
+]
+}
+}
+},
+"components": {
+"schemas": {
+"ActiveUsersPeriodResponse": {
+"required": [
+"isPartialPeriod",
+"period"
+],
+"type": "object",
+"properties": {
+"period": {
+"type": "string"
+},
+"activeUserCount": {
+"type": "integer",
+"format": "int64",
+"nullable": true
+},
+"isPartialPeriod": {
+"type": "boolean"
+}
+},
+"additionalProperties": false
+},
+"ActiveUsersRangeResponse": {
+"required": [
+"end",
+"interval",
+"start"
+],
+"type": "object",
+"properties": {
+"start": {
+"type": "string"
+},
+"end": {
+"type": "string"
+},
+"interval": {
+"$ref": "#/components/schemas/DateRangeInterval"
+}
+},
+"additionalProperties": false
+},
+"ActiveUsersResponse": {
+"required": [
+"generatedAt",
+"periods",
+"range"
+],
+"type": "object",
+"properties": {
+"range": {
+"$ref": "#/components/schemas/ActiveUsersRangeResponse"
+},
+"periods": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ActiveUsersPeriodResponse"
+}
+},
+"totalActiveUsers": {
+"type": "integer",
+"format": "int64",
+"nullable": true
+},
+"generatedAt": {
+"type": "string",
+"format": "date-time"
+}
+},
+"additionalProperties": false
+},
+"AnswerEngagementPeriodResponse": {
+"required": [
+"copyRate",
+"isPartialPeriod",
+"period",
+"responseCopies",
+"responseCount",
+"responseSourceClicked",
+"sourceClickedRate",
+"totalResponseCopies",
+"totalSourcesClicked"
+],
+"type": "object",
+"properties": {
+"period": {
+"type": "string"
+},
+"tenantName": {
+"type": "string",
+"nullable": true
+},
+"responseCount": {
+"type": "integer",
+"format": "int64"
+},
+"responseCopies": {
+"type": "integer",
+"format": "int64"
+},
+"totalResponseCopies": {
+"type": "integer",
+"format": "int64"
+},
+"responseSourceClicked": {
+"type": "integer",
+"format": "int64"
+},
+"totalSourcesClicked": {
+"type": "integer",
+"format": "int64"
+},
+"copyRate": {
+"type": "number",
+"format": "double"
+},
+"sourceClickedRate": {
+"type": "number",
+"format": "double"
+},
+"isPartialPeriod": {
+"type": "boolean"
+}
+},
+"additionalProperties": false
+},
+"AnswerEngagementRangeResponse": {
+"required": [
+"end",
+"interval",
+"start"
+],
+"type": "object",
+"properties": {
+"start": {
+"type": "string"
+},
+"end": {
+"type": "string"
+},
+"interval": {
+"$ref": "#/components/schemas/DateRangeInterval"
+}
+},
+"additionalProperties": false
+},
+"AnswerEngagementResponse": {
+"required": [
+"periods",
+"range"
+],
+"type": "object",
+"properties": {
+"range": {
+"$ref": "#/components/schemas/AnswerEngagementRangeResponse"
+},
+"periods": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/AnswerEngagementPeriodResponse"
+}
+}
+},
+"additionalProperties": false
+},
+"DateRangeInterval": {
+"enum": [
+"day",
+"week",
+"month"
+],
+"type": "string"
+},
+"HelpfulAnswerRatePeriodResponse": {
+"required": [
+"feedback",
+"isPartialPeriod",
+"negativeFeedback",
+"period",
+"positiveFeedback",
+"totalResponses"
+],
+"type": "object",
+"properties": {
+"period": {
+"type": "string"
+},
+"totalResponses": {
+"type": "integer",
+"format": "int64"
+},
+"feedback": {
+"type": "integer",
+"format": "int64"
+},
+"feedbackRate": {
+"type": "number",
+"format": "double",
+"nullable": true
+},
+"positiveFeedback": {
+"type": "integer",
+"format": "int64"
+},
+"helpfulAnswerRate": {
+"type": "number",
+"format": "double",
+"nullable": true
+},
+"negativeFeedback": {
+"type": "integer",
+"format": "int64"
+},
+"unhelpfulAnswerRate": {
+"type": "number",
+"format": "double",
+"nullable": true
+},
+"isPartialPeriod": {
+"type": "boolean"
+}
+},
+"additionalProperties": false
+},
+"HelpfulAnswerRateRangeResponse": {
+"required": [
+"end",
+"interval",
+"start"
+],
+"type": "object",
+"properties": {
+"start": {
+"type": "string"
+},
+"end": {
+"type": "string"
+},
+"interval": {
+"$ref": "#/components/schemas/DateRangeInterval"
+}
+},
+"additionalProperties": false
+},
+"HelpfulAnswerRateResponse": {
+"required": [
+"generatedAt",
+"periods",
+"range"
+],
+"type": "object",
+"properties": {
+"range": {
+"$ref": "#/components/schemas/HelpfulAnswerRateRangeResponse"
+},
+"periods": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/HelpfulAnswerRatePeriodResponse"
+}
+},
+"generatedAt": {
+"type": "string",
+"format": "date-time"
+}
+},
+"additionalProperties": false
+},
+"KnowledgeCreditsUsagePeriodResponse": {
+"required": [
+"apiCredits",
+"chatResponses",
+"isPartialPeriod",
+"mcpCredits",
+"period",
+"totalCredits"
+],
+"type": "object",
+"properties": {
+"period": {
+"type": "string"
+},
+"chatResponses": {
+"type": "number",
+"format": "double"
+},
+"mcpCredits": {
+"type": "number",
+"format": "double"
+},
+"apiCredits": {
+"type": "number",
+"format": "double"
+},
+"isPartialPeriod": {
+"type": "boolean"
+},
+"totalCredits": {
+"type": "number",
+"format": "double",
+"readOnly": true
+}
+},
+"additionalProperties": false
+},
+"KnowledgeCreditsUsageRangeResponse": {
+"required": [
+"end",
+"interval",
+"start"
+],
+"type": "object",
+"properties": {
+"start": {
+"type": "string"
+},
+"end": {
+"type": "string"
+},
+"interval": {
+"$ref": "#/components/schemas/DateRangeInterval"
+}
+},
+"additionalProperties": false
+},
+"KnowledgeCreditsUsageResponse": {
+"required": [
+"periods",
+"range",
+"totalCredits"
+],
+"type": "object",
+"properties": {
+"range": {
+"$ref": "#/components/schemas/KnowledgeCreditsUsageRangeResponse"
+},
+"periods": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/KnowledgeCreditsUsagePeriodResponse"
+}
+},
+"totalCredits": {
+"type": "number",
+"format": "double",
+"readOnly": true
+}
+},
+"additionalProperties": false
+},
+"MostActiveUserResponse": {
+"required": [
+"displayName",
+"questionCount",
+"rank",
+"sourceOpenCount",
+"userId"
+],
+"type": "object",
+"properties": {
+"rank": {
+"type": "integer",
+"format": "int32"
+},
+"userId": {
+"type": "string",
+"format": "uuid"
+},
+"displayName": {
+"type": "string"
+},
+"questionCount": {
+"type": "integer",
+"format": "int64"
+},
+"sourceOpenCount": {
+"type": "integer",
+"format": "int64"
+}
+},
+"additionalProperties": false
+},
+"MostActiveUsersLeaderboardResponse": {
+"required": [
+"users"
+],
+"type": "object",
+"properties": {
+"users": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/MostActiveUserResponse"
+}
+}
+},
+"additionalProperties": false
+},
+"MostActiveUsersLeaderboardsResponse": {
+"required": [
+"mcp",
+"webUi"
+],
+"type": "object",
+"properties": {
+"webUi": {
+"$ref": "#/components/schemas/MostActiveUsersLeaderboardResponse"
+},
+"mcp": {
+"$ref": "#/components/schemas/MostActiveUsersLeaderboardResponse"
+}
+},
+"additionalProperties": false
+},
+"MostActiveUsersRangeResponse": {
+"required": [
+"end",
+"interval",
+"start"
+],
+"type": "object",
+"properties": {
+"start": {
+"type": "string"
+},
+"end": {
+"type": "string"
+},
+"interval": {
+"$ref": "#/components/schemas/DateRangeInterval"
+}
+},
+"additionalProperties": false
+},
+"MostActiveUsersResponse": {
+"required": [
+"generatedAt",
+"leaderboards",
+"range"
+],
+"type": "object",
+"properties": {
+"range": {
+"$ref": "#/components/schemas/MostActiveUsersRangeResponse"
+},
+"leaderboards": {
+"$ref": "#/components/schemas/MostActiveUsersLeaderboardsResponse"
+},
+"generatedAt": {
+"type": "string",
+"format": "date-time"
+}
+},
+"additionalProperties": false
+},
+"ProblemDetails": {
+"type": "object",
+"properties": {
+"type": {
+"type": "string",
+"nullable": true
+},
+"title": {
+"type": "string",
+"nullable": true
+},
+"status": {
+"type": "integer",
+"format": "int32",
+"nullable": true
+},
+"detail": {
+"type": "string",
+"nullable": true
+},
+"instance": {
+"type": "string",
+"nullable": true
+}
+},
+"additionalProperties": {}
+},
+"QuestionsSubmittedPeriodResponse": {
+"required": [
+"isPartialPeriod",
+"period",
+"queryCountByChannel",
+"totalQueryCount"
+],
+"type": "object",
+"properties": {
+"period": {
+"type": "string"
+},
+"isPartialPeriod": {
+"type": "boolean"
+},
+"totalQueryCount": {
+"type": "integer",
+"format": "int64"
+},
+"queryCountByChannel": {
+"$ref": "#/components/schemas/QuestionsSubmittedQueryCountByChannelResponse"
+}
+},
+"additionalProperties": false
+},
+"QuestionsSubmittedQueryCountByChannelResponse": {
+"required": [
+"api",
+"mcp",
+"webUi"
+],
+"type": "object",
+"properties": {
+"webUi": {
+"type": "integer",
+"format": "int64"
+},
+"mcp": {
+"type": "integer",
+"format": "int64"
+},
+"api": {
+"type": "integer",
+"format": "int64"
+}
+},
+"additionalProperties": false
+},
+"QuestionsSubmittedRangeResponse": {
+"required": [
+"end",
+"interval",
+"start"
+],
+"type": "object",
+"properties": {
+"start": {
+"type": "string"
+},
+"end": {
+"type": "string"
+},
+"interval": {
+"$ref": "#/components/schemas/DateRangeInterval"
+}
+},
+"additionalProperties": false
+},
+"QuestionsSubmittedResponse": {
+"required": [
+"generatedAt",
+"periods",
+"range"
+],
+"type": "object",
+"properties": {
+"range": {
+"$ref": "#/components/schemas/QuestionsSubmittedRangeResponse"
+},
+"periods": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/QuestionsSubmittedPeriodResponse"
+}
+},
+"generatedAt": {
+"type": "string",
+"format": "date-time"
+}
+},
+"additionalProperties": false
+},
+"ReportError": {
+"required": [
+"code",
+"description"
+],
+"type": "object",
+"properties": {
+"code": {
+"type": "string"
+},
+"description": {
+"type": "string"
+}
+},
+"additionalProperties": false
+},
+"ReportValidationProblemDetails": {
+"required": [
+"errors"
+],
+"type": "object",
+"properties": {
+"type": {
+"type": "string",
+"nullable": true
+},
+"title": {
+"type": "string",
+"nullable": true
+},
+"status": {
+"type": "integer",
+"format": "int32",
+"nullable": true
+},
+"detail": {
+"type": "string",
+"nullable": true
+},
+"instance": {
+"type": "string",
+"nullable": true
+},
+"errors": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ReportError"
+}
+}
+},
+"additionalProperties": {}
+},
+"SearchableKnowledgePeriodResponse": {
+"required": [
+"isPartialPeriod",
+"nodesCreated",
+"period"
+],
+"type": "object",
+"properties": {
+"period": {
+"type": "string"
+},
+"nodesCreated": {
+"type": "integer",
+"format": "int64"
+},
+"isPartialPeriod": {
+"type": "boolean"
+}
+},
+"additionalProperties": false
+},
+"SearchableKnowledgeRangeResponse": {
+"required": [
+"end",
+"interval",
+"start"
+],
+"type": "object",
+"properties": {
+"start": {
+"type": "string"
+},
+"end": {
+"type": "string"
+},
+"interval": {
+"$ref": "#/components/schemas/DateRangeInterval"
+}
+},
+"additionalProperties": false
+},
+"SearchableKnowledgeResponse": {
+"required": [
+"periods",
+"range"
+],
+"type": "object",
+"properties": {
+"range": {
+"$ref": "#/components/schemas/SearchableKnowledgeRangeResponse"
+},
+"periods": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/SearchableKnowledgePeriodResponse"
+}
+}
+},
+"additionalProperties": false
+},
+"AccessControlListGrant": {
+"required": [
+"identifier",
+"kind",
+"provider"
+],
+"type": "object",
+"properties": {
+"kind": {
+"$ref": "#/components/schemas/AccessControlListKind"
+},
+"provider": {
+"maxLength": 128,
+"minLength": 0,
+"pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+"type": "string",
+"description": "The lowercase identity-provider namespace."
+},
+"identifier": {
+"maxLength": 256,
+"minLength": 0,
+"type": "string",
+"description": "A provider-owned identifier up to 256 characters long."
+}
+},
+"additionalProperties": false,
+"description": "Identifies an ACL grant for a subject that may read the content. Membership\nresolution is performed by
+the provider named in StackInternal.ContentIngestion.Connectors.Models.AccessControlListGrant.Provider."
+},
+"AccessControlListKind": {
+"enum": [
+"domain",
+"group",
+"user",
+"anyone"
+],
+"type": "string"
+},
+"AclGrantMembershipAclRequest": {
+"type": "object",
+"properties": {
+"kind": {
+"type": "string",
+"description": "The ACL grant kind. Supported values are 'domain', 'group', 'user', and 'anyone'.",
+"nullable": true
+},
+"provider": {
+"type": "string",
+"description": "The lowercase provider namespace for this ACL grant, such as 'slack'.",
+"nullable": true
+},
+"identifier": {
+"type": "string",
+"description": "The provider-owned opaque identifier for this ACL grant.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "One ACL grant reference from the request body."
+},
+"AclGrantMembershipMemberRequest": {
+"required": [
+"identifier",
+"provider"
+],
+"type": "object",
+"properties": {
+"provider": {
+"type": "string",
+"description": "The lowercase provider namespace for this member, such as 'slack'."
+},
+"identifier": {
+"type": "string",
+"description": "The provider-owned opaque identifier for this member."
+}
+},
+"additionalProperties": false,
+"description": "One provider-owned member identity for an ACL grant."
+},
+"AclGrantMembershipSyncGrantRequest": {
+"type": "object",
+"properties": {
+"acl": {
+"$ref": "#/components/schemas/AclGrantMembershipAclRequest"
+},
+"members": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/AclGrantMembershipMemberRequest"
+},
+"description": "The complete set of current members for this ACL grant. Use an empty array when the grant currently has
+no members. Grants with kind 'anyone' are always normalized to an empty member set.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "One ACL grant and the complete member set currently observed for it."
+},
+"AclGrantMembershipSyncGrantResultResponse": {
+"required": [
+"acl",
+"grantedCount",
+"observedAt",
+"revokedCount"
+],
+"type": "object",
+"properties": {
+"acl": {
+"$ref": "#/components/schemas/AccessControlListGrant"
+},
+"observedAt": {
+"type": "string",
+"description": "The observedAt timestamp applied to this ACL grant.",
+"format": "date-time"
+},
+"grantedCount": {
+"type": "integer",
+"description": "The number of members granted by this request.",
+"format": "int32"
+},
+"revokedCount": {
+"type": "integer",
+"description": "The number of members revoked by this request.",
+"format": "int32"
+},
+"grantedChangeSetId": {
+"type": "string",
+"description": "The change-set id for granted members, or null when no grants were recorded.",
+"format": "uuid",
+"nullable": true
+},
+"revokedChangeSetId": {
+"type": "string",
+"description": "The change-set id for revoked members, or null when no revokes were recorded.",
+"format": "uuid",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Per-grant grant and revoke counts returned after synchronization."
+},
+"ArchetypeContentEnvelope": {
+"required": [
+"archetype",
+"data",
+"dataSchema",
+"representation",
+"representationVersion"
+],
+"type": "object",
+"properties": {
+"representation": {
+"type": "string",
+"description": "The payload representation family."
+},
+"representationVersion": {
+"type": "integer",
+"description": "The representation version used for this payload.",
+"format": "int32"
+},
+"archetype": {
+"type": "string",
+"description": "The archetype name for the payload."
+},
+"dataSchema": {
+"type": "string",
+"description": "The Dimension Registry schema identifier used to validate
+StackInternal.ContentIngestion.Connectors.Models.ArchetypeContentEnvelope.Data.",
+"example": "com.stackoverflow.stackinternal.content.archetype.document.v1"
+},
+"data": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ChangeArtifactArchetype"
+},
+{
+"$ref": "#/components/schemas/ContainerArchetype"
+},
+{
+"$ref": "#/components/schemas/ConversationArchetype"
+},
+{
+"$ref": "#/components/schemas/DocumentArchetype"
+},
+{
+"$ref": "#/components/schemas/MessageArchetype"
+},
+{
+"$ref": "#/components/schemas/MetricSnapshotArchetype"
+},
+{
+"$ref": "#/components/schemas/SessionArchetype"
+},
+{
+"$ref": "#/components/schemas/SourceEventArchetype"
+},
+{
+"$ref": "#/components/schemas/StructuredRecordArchetype"
+},
+{
+"$ref": "#/components/schemas/WorkItemArchetype"
+}
+],
+"description": "Archetype payload matching the supplied dataSchema."
+}
+},
+"additionalProperties": false,
+"description": "Standardized archetype envelope used for transport and storage."
+},
+"ChangeArtifactArchetype": {
+"required": [
+"title",
+"changeType",
+"createdAt",
+"authoredByPersonaRef",
+"state",
+"sourceUri"
+],
+"type": "object",
+"properties": {
+"title": {
+"type": "string",
+"description": "Commit subject, pull request title, release name, or other primary label for the change artifact.",
+"nullable": true
+},
+"changeType": {
+"type": "string",
+"description": "High-level change classification such as commit, pull request, release, patch, or version bump.",
+"nullable": true
+},
+"createdAt": {
+"type": "string",
+"description": "Timestamp describing when the change artifact was created.",
+"format": "date-time",
+"nullable": true
+},
+"authoredByPersonaRef": {
+"type": "string",
+"description": "Observed external identifier in the source system for the persona that authored, created, or published
+the change artifact. Resolution to a persona is based on the source value together with this persona reference and
+happens in the extraction domain.",
+"nullable": true
+},
+"state": {
+"type": "string",
+"description": "Current state such as open, merged, closed, published, draft, or prerelease.",
+"nullable": true
+},
+"sourceUri": {
+"type": "string",
+"description": "Deep link to the change artifact in the source system.",
+"format": "uri",
+"nullable": true
+},
+"descriptionText": {
+"type": "string",
+"description": "Commit body, pull request description, release notes, or other long-form explanation of the change.",
+"nullable": true
+},
+"updatedAt": {
+"type": "string",
+"description": "Timestamp describing the latest metadata update for the change artifact.",
+"format": "date-time",
+"nullable": true
+},
+"baseRef": {
+"type": "string",
+"description": "Reference to the target branch, previous version, or prior state of the change.",
+"nullable": true
+},
+"headRef": {
+"type": "string",
+"description": "Reference to the source branch, head SHA, or new state introduced by the change.",
+"nullable": true
+},
+"mergedOrPublishedAt": {
+"type": "string",
+"description": "Timestamp describing when the change was merged, landed, or published.",
+"format": "date-time",
+"nullable": true
+},
+"linkedWorkItemRefsJson": {
+"type": "string",
+"description": "JSON-serialized collection of related issues, tickets, milestones, or other work-tracking links.",
+"nullable": true
+},
+"reviewMessageRefsJson": {
+"type": "string",
+"description": "JSON-serialized collection of review entries and review comments associated with the change.",
+"nullable": true
+},
+"metadataJson": {
+"type": "string",
+"description": "JSON-serialized source-specific metadata such as SHA, tag, file stats, merge queue state, or target
+commitish.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Versioned change unit whose primary meaning is the proposed or completed change itself."
+},
+"ContainerArchetype": {
+"required": [
+"displayName",
+"containerType",
+"ownerRefs",
+"sourceUri"
+],
+"type": "object",
+"properties": {
+"displayName": {
+"type": "string",
+"description": "Display name for the container, such as a repository, channel, project, team, or space name.",
+"nullable": true
+},
+"containerType": {
+"type": "string",
+"description": "High-level container classification such as space, repository, board, team, channel, project, room, or
+service.",
+"nullable": true
+},
+"ownerRefs": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"description": "Observed external identifiers in the source system for the owners, leads, maintainers, or administrators
+for the container. Resolution to personas is based on the source value together with each persona reference and happens
+in the extraction domain.",
+"nullable": true
+},
+"sourceUri": {
+"type": "string",
+"description": "Deep link to the container in the source system.",
+"format": "uri",
+"nullable": true
+},
+"descriptionText": {
+"type": "string",
+"description": "Purpose, charter, topic, or description that explains what the container is for.",
+"nullable": true
+},
+"createdAt": {
+"type": "string",
+"description": "Timestamp describing when the container was created.",
+"format": "date-time",
+"nullable": true
+},
+"updatedAt": {
+"type": "string",
+"description": "Timestamp describing the most recent metadata change to the container.",
+"format": "date-time",
+"nullable": true
+},
+"visibility": {
+"type": "string",
+"description": "Visibility or access state such as public, private, internal, shared, or archived.",
+"nullable": true
+},
+"parentContainerRef": {
+"type": "string",
+"description": "Reference to a parent organization, team, portfolio, or space when one exists.",
+"nullable": true
+},
+"metadataJson": {
+"type": "string",
+"description": "JSON-serialized source-specific container metadata such as default branch, topic, moderation settings,
+or billing linkage.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Stable place or boundary that groups related artifacts, discussions, or work."
+},
+"ContentHierarchySegment": {
+"required": [
+"displayName",
+"id"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"displayName": {
+"type": "string"
+}
+},
+"additionalProperties": false
+},
+"ConversationArchetype": {
+"required": [
+"conversationType",
+"startedAt",
+"lastActivityAt",
+"participantRefs",
+"sourceUri"
+],
+"type": "object",
+"properties": {
+"conversationType": {
+"type": "string",
+"description": "High-level conversation classification such as direct message, group chat, channel thread, comment
+thread, or Q&A thread.",
+"nullable": true
+},
+"startedAt": {
+"type": "string",
+"description": "Timestamp describing when the conversation began.",
+"format": "date-time",
+"nullable": true
+},
+"lastActivityAt": {
+"type": "string",
+"description": "Timestamp of the most recent message or activity associated with the conversation.",
+"format": "date-time",
+"nullable": true
+},
+"participantRefs": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"description": "Observed external identifiers in the source system for the participants involved in the conversation.
+Resolution to personas is based on the source value together with each persona reference and happens in the extraction
+domain.",
+"nullable": true
+},
+"sourceUri": {
+"type": "string",
+"description": "Deep link to the chat, thread, or channel in the source system.",
+"format": "uri",
+"nullable": true
+},
+"title": {
+"type": "string",
+"description": "Channel name, thread subject, topic, or another human-readable label for the conversation.",
+"nullable": true
+},
+"summary": {
+"type": "string",
+"description": "Optional synopsis of the discussion to help consumers understand the exchange quickly.",
+"nullable": true
+},
+"messages": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/MessageArchetype"
+},
+"description": "Ordered collection of normalized message archetype instances materialized for the conversation when
+callers need the usable thread shape.",
+"nullable": true
+},
+"messageCount": {
+"type": "integer",
+"description": "Number of messages currently known for the conversation when the source exposes that count.",
+"format": "int32",
+"nullable": true
+},
+"containerRef": {
+"type": "string",
+"description": "Reference to the workspace, team, channel, space, or project that contains the conversation.",
+"nullable": true
+},
+"status": {
+"type": "string",
+"description": "Conversation state such as active, closed, archived, resolved, or locked.",
+"nullable": true
+},
+"metadataJson": {
+"type": "string",
+"description": "JSON-serialized source-specific conversation metadata such as thread IDs, visibility, or reply
+counters.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Ordered exchange context that groups related messages, participants, and activity over time."
+},
+"DocumentArchetype": {
+"required": [
+"title",
+"textContent",
+"documentType",
+"personaRefs",
+"sourceUri"
+],
+"type": "object",
+"properties": {
+"title": {
+"type": "string",
+"description": "Human-readable name of the document or document-like artifact.",
+"nullable": true
+},
+"textContent": {
+"type": "string",
+"description": "Extracted body text, OCR text, or the normalized textual representation of the document content.",
+"nullable": true
+},
+"documentType": {
+"type": "string",
+"description": "High-level document classification such as page, file, blog post, note, knowledge article, or
+attachment.",
+"nullable": true
+},
+"personaRefs": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"description": "Observed external identifiers in the source system for the people who created or most recently edited
+the document. Resolution to personas is based on the source value together with each persona reference and happens in
+the extraction domain.",
+"nullable": true
+},
+"sourceUri": {
+"type": "string",
+"description": "Canonical deep link back to the document in the source system.",
+"format": "uri",
+"nullable": true
+},
+"summary": {
+"type": "string",
+"description": "Optional source-provided or generated synopsis that helps a reader understand the document quickly.",
+"nullable": true
+},
+"createdAt": {
+"type": "string",
+"description": "Timestamp describing when the source document was first created.",
+"format": "date-time",
+"nullable": true
+},
+"lastModifiedAt": {
+"type": "string",
+"description": "Timestamp describing the most recent source-side modification to the document.",
+"format": "date-time",
+"nullable": true
+},
+"containerRef": {
+"type": "string",
+"description": "Reference to the parent space, repository, drive, folder, channel, or project that contains the
+document.",
+"nullable": true
+},
+"mimeType": {
+"type": "string",
+"description": "MIME type for file-backed content when the source exposes one.",
+"nullable": true
+},
+"language": {
+"type": "string",
+"description": "Natural language code or label for the extracted content when it is known.",
+"nullable": true
+},
+"tagsJson": {
+"type": "string",
+"description": "JSON-serialized collection of labels, categories, or source taxonomies associated with the document.",
+"nullable": true
+},
+"status": {
+"type": "string",
+"description": "Lifecycle or publication state such as draft, published, archived, deleted, or current.",
+"nullable": true
+},
+"sourceVersion": {
+"type": "string",
+"description": "Source-specific version number, revision identifier, or current document revision label.",
+"nullable": true
+},
+"metadataJson": {
+"type": "string",
+"description": "JSON-serialized source-specific metadata that does not cleanly promote to a canonical document
+property.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Durable authored content whose primary value is the document body and its stable descriptive metadata."
+},
+"HttpValidationProblemDetails": {
+"required": [
+"errors"
+],
+"type": "object",
+"allOf": [
+{
+"$ref": "#/components/schemas/ProblemDetails"
+}
+],
+"properties": {
+"errors": {
+"type": "object",
+"additionalProperties": {
+"type": "array",
+"items": {
+"type": "string"
+}
+}
+}
+},
+"additionalProperties": {}
+},
+"InsertContentV3Request": {
+"required": [
+"acls",
+"data",
+"entityType",
+"source",
+"sourceId",
+"sourceUri"
+],
+"type": "object",
+"properties": {
+"source": {
+"type": "string",
+"description": "The upstream system that produced the content, such as 'github' or 'slack'."
+},
+"sourceId": {
+"type": "string",
+"description": "The stable identifier from the upstream system for this content item. The combination of source and
+sourceId must be unique within the tenant."
+},
+"sourceUri": {
+"type": "string",
+"description": "The absolute URI of the content item in the upstream system.",
+"format": "uri"
+},
+"acls": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/AccessControlListGrant"
+},
+"description": "The access control entries that define who can view the content."
+},
+"entityType": {
+"type": "string",
+"description": "The source-specific entity type for this content item, such as 'markdown-file' or 'message'."
+},
+"data": {
+"$ref": "#/components/schemas/ArchetypeContentEnvelope"
+},
+"hierarchy": {
+"type": "string",
+"description": "The optional absolute URI-shaped container hierarchy for this content item.",
+"format": "uri",
+"nullable": true
+},
+"hierarchySegments": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ContentHierarchySegment"
+},
+"description": "Optional root-to-leaf containers with stable IDs and display names. Requires a matching hierarchy URI.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Request body for creating a new content record from a Dimension Registry archetype payload."
+},
+"InsertContentV3Response": {
+"required": [
+"contentId"
+],
+"type": "object",
+"properties": {
+"contentId": {
+"type": "string",
+"description": "The unique identifier of the stored content version that was created.",
+"format": "uuid"
+}
+},
+"additionalProperties": false,
+"description": "Response returned when a content version is created through the public v3 content endpoint."
+},
+"LegacyJsonContentDataResponse": {
+"type": "object",
+"additionalProperties": {},
+"description": "A legacy content payload that preserves the stored source-specific JSON object."
+},
+"MessageArchetype": {
+"required": [
+"textContent",
+"messageType",
+"createdAt",
+"personaRef",
+"sourceUri"
+],
+"type": "object",
+"properties": {
+"textContent": {
+"type": "string",
+"description": "The message body or normalized textual content of the utterance.",
+"nullable": true
+},
+"messageType": {
+"type": "string",
+"description": "High-level message classification such as chat, comment, review, reply, Q&A, note, or announcement.",
+"nullable": true
+},
+"createdAt": {
+"type": "string",
+"description": "Timestamp describing when the message was first created or submitted.",
+"format": "date-time",
+"nullable": true
+},
+"personaRef": {
+"type": "string",
+"description": "Observed external identifier in the source system for the persona that authored or sent the message.
+Resolution to a persona is based on the source value together with this persona reference and happens in the extraction
+domain.",
+"nullable": true
+},
+"sourceUri": {
+"type": "string",
+"description": "Deep link to the exact message in the source system.",
+"format": "uri",
+"nullable": true
+},
+"title": {
+"type": "string",
+"description": "Optional subject line, heading, or generated snippet for the message.",
+"nullable": true
+},
+"lastModifiedAt": {
+"type": "string",
+"description": "Timestamp of the latest source-tracked edit to the message.",
+"format": "date-time",
+"nullable": true
+},
+"conversationRef": {
+"type": "string",
+"description": "Reference to the parent conversation when the message belongs to one.",
+"nullable": true
+},
+"parentRef": {
+"type": "string",
+"description": "Reference to the immediate parent object such as a work item, document, message, or review object.",
+"nullable": true
+},
+"replyToRef": {
+"type": "string",
+"description": "Reference to the direct parent message or comment when the source models threaded replies.",
+"nullable": true
+},
+"mentions": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"description": "Observed external identifiers in the source system for mentioned personas or entities captured from the
+message. Resolution to a persona or other mentioned identity is based on the source value together with each mention
+reference and happens in the extraction domain.",
+"nullable": true
+},
+"attachmentsJson": {
+"type": "string",
+"description": "JSON-serialized collection of attachments or linked artifacts associated with the message.",
+"nullable": true
+},
+"reactionsJson": {
+"type": "string",
+"description": "JSON-serialized reaction counts or structured reaction metadata captured for the message.",
+"nullable": true
+},
+"metadataJson": {
+"type": "string",
+"description": "JSON-serialized source-specific message metadata such as subtype, importance, visibility, or line
+context.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Single authored utterance or note within a broader conversation, work item, review flow, or comment
+thread."
+},
+"MetricSnapshotArchetype": {
+"required": [
+"metricFamily",
+"subjectRef",
+"capturedAt",
+"measurementsJson",
+"sourceUri"
+],
+"type": "object",
+"properties": {
+"metricFamily": {
+"type": "string",
+"description": "Broad measurement family such as usage, attendance, traffic, queue performance, or SLA.",
+"nullable": true
+},
+"subjectRef": {
+"type": "string",
+"description": "Reference to the user, team, organization, repository, session, queue, service, or other subject being
+measured.",
+"nullable": true
+},
+"capturedAt": {
+"type": "string",
+"description": "Timestamp of the snapshot capture or the representative timestamp for the measured period.",
+"format": "date-time",
+"nullable": true
+},
+"measurementsJson": {
+"type": "string",
+"description": "JSON-serialized map of numeric measurements keyed by metric name.",
+"nullable": true
+},
+"sourceUri": {
+"type": "string",
+"description": "Deep link to the source report or metric record when the source provides one.",
+"format": "uri",
+"nullable": true
+},
+"periodStartAt": {
+"type": "string",
+"description": "Start timestamp for the measured period when the snapshot covers a window of time.",
+"format": "date-time",
+"nullable": true
+},
+"periodEndAt": {
+"type": "string",
+"description": "End timestamp for the measured period when the snapshot covers a window of time.",
+"format": "date-time",
+"nullable": true
+},
+"dimensionsJson": {
+"type": "string",
+"description": "JSON-serialized dimension bag describing slice values such as language, IDE, model, queue, channel, or
+feature.",
+"nullable": true
+},
+"aggregationLevel": {
+"type": "string",
+"description": "Level at which the metrics were aggregated, such as user, team, org, repo, session, or queue.",
+"nullable": true
+},
+"metadataJson": {
+"type": "string",
+"description": "JSON-serialized source-specific rollup metadata such as sample counts, report IDs, or derived
+counters.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Aggregate measurement captured for a subject and a point-in-time or bounded reporting period."
+},
+"PutAclGrantMembershipsV3Request": {
+"required": [
+"observedAt",
+"source"
+],
+"type": "object",
+"properties": {
+"source": {
+"type": "string",
+"description": "The registered API-managed source that owns this ACL membership snapshot."
+},
+"observedAt": {
+"type": "string",
+"description": "The time this snapshot was observed in the upstream system.",
+"format": "date-time"
+},
+"grants": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/AclGrantMembershipSyncGrantRequest"
+},
+"description": "The ACL grants to replace. Each grant is a full replacement of its current member set.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Request body for synchronizing the current member set of one or more ACL grants."
+},
+"PutAclGrantMembershipsV3Response": {
+"required": [
+"results",
+"runId"
+],
+"type": "object",
+"properties": {
+"runId": {
+"type": "string",
+"description": "The synthetic ingestion run recorded for this request.",
+"format": "uuid"
+},
+"results": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/AclGrantMembershipSyncGrantResultResponse"
+},
+"description": "Per-grant grant and revoke counts derived from the applied membership changes."
+}
+},
+"additionalProperties": false,
+"description": "Response body for an ACL grant membership synchronization request."
+},
+"SessionArchetype": {
+"required": [
+"title",
+"sessionType",
+"startAt",
+"hostRefs",
+"participantRefs",
+"status",
+"sourceUri"
+],
+"type": "object",
+"properties": {
+"title": {
+"type": "string",
+"description": "Human-readable session name, topic, or generated label.",
+"nullable": true
+},
+"sessionType": {
+"type": "string",
+"description": "High-level session classification such as meeting, webinar, call, event, or SMS session.",
+"nullable": true
+},
+"startAt": {
+"type": "string",
+"description": "Timestamp describing when the session started or is scheduled to start.",
+"format": "date-time",
+"nullable": true
+},
+"hostRefs": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"description": "Observed external identifiers in the source system for host, organizer, or owner personas. Resolution to
+personas is based on the source value together with each persona reference and happens in the extraction domain.",
+"nullable": true
+},
+"participantRefs": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"description": "Observed external identifiers in the source system for participants, attendees, panelists, or
+registrants. Resolution to personas is based on the source value together with each persona reference and happens in the
+extraction domain.",
+"nullable": true
+},
+"status": {
+"type": "string",
+"description": "Session state such as scheduled, live, completed, canceled, or no-show.",
+"nullable": true
+},
+"sourceUri": {
+"type": "string",
+"description": "Deep link back to the session record in the source system.",
+"format": "uri",
+"nullable": true
+},
+"descriptionText": {
+"type": "string",
+"description": "Agenda, description, or source-provided summary of what the session is about.",
+"nullable": true
+},
+"endAt": {
+"type": "string",
+"description": "Timestamp describing when the session ended or is scheduled to end.",
+"format": "date-time",
+"nullable": true
+},
+"durationSeconds": {
+"type": "integer",
+"description": "Duration of the session in whole seconds when that value is known.",
+"format": "int32",
+"nullable": true
+},
+"joinUrl": {
+"type": "string",
+"description": "Join URL or entry point for the session when one is appropriate to retain.",
+"format": "uri",
+"nullable": true
+},
+"containerRef": {
+"type": "string",
+"description": "Reference to the team, channel, account, hub, or other organizational boundary that contains the
+session.",
+"nullable": true
+},
+"transcriptText": {
+"type": "string",
+"description": "Normalized spoken transcript or transcript excerpt associated with the session.",
+"nullable": true
+},
+"recordingRefsJson": {
+"type": "string",
+"description": "JSON-serialized collection of linked recordings or related session artifacts.",
+"nullable": true
+},
+"metadataJson": {
+"type": "string",
+"description": "JSON-serialized source-specific session metadata such as timezone, attendance stats, poll linkage, or
+telephony fields.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Time-bounded live interaction whose timing, participation, and runtime outcome are core to the meaning."
+},
+"SourceEventArchetype": {
+"required": [
+"eventType",
+"occurredAt",
+"actorRefs",
+"subjectRef",
+"sourceUri"
+],
+"type": "object",
+"properties": {
+"eventType": {
+"type": "string",
+"description": "Name or classification of the source occurrence being captured.",
+"nullable": true
+},
+"occurredAt": {
+"type": "string",
+"description": "Timestamp describing when the event happened.",
+"format": "date-time",
+"nullable": true
+},
+"actorRefs": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"description": "Observed external identifiers in the source system for the personas, systems, or services that caused
+the event. Resolution to a persona or other actor identity is based on the source value together with each actor
+reference and happens in the extraction domain.",
+"nullable": true
+},
+"subjectRef": {
+"type": "string",
+"description": "Reference to the primary thing the event happened to.",
+"nullable": true
+},
+"sourceUri": {
+"type": "string",
+"description": "Deep link to the event in the source system when the source exposes one.",
+"format": "uri",
+"nullable": true
+},
+"title": {
+"type": "string",
+"description": "Optional short label or generated summary for the event.",
+"nullable": true
+},
+"containerRef": {
+"type": "string",
+"description": "Reference to the repository, project, channel, service, or other grouping context around the event.",
+"nullable": true
+},
+"status": {
+"type": "string",
+"description": "Outcome or resulting state associated with the event when that meaning is useful.",
+"nullable": true
+},
+"payloadText": {
+"type": "string",
+"description": "Readable normalized event description or textual payload content.",
+"nullable": true
+},
+"payloadJson": {
+"type": "string",
+"description": "JSON-serialized raw or normalized event payload for cases where structured details matter.",
+"nullable": true
+},
+"metadataJson": {
+"type": "string",
+"description": "JSON-serialized source-specific event metadata such as environment, headers, batch IDs, or alert tags.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Immutable source occurrence that answers what happened, when it happened, and what it happened to."
+},
+"StructuredRecordArchetype": {
+"required": [
+"recordType",
+"fieldsJson",
+"ownerRefs",
+"sourceUri"
+],
+"type": "object",
+"properties": {
+"recordType": {
+"type": "string",
+"description": "Broad business-object classification for the structured record.",
+"nullable": true
+},
+"fieldsJson": {
+"type": "string",
+"description": "JSON-serialized map of canonicalized key-value attributes that capture the record payload.",
+"nullable": true
+},
+"ownerRefs": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"description": "Observed external identifiers in the source system for owners, requesters, maintainers, or other linked
+people for the record. Resolution to personas is based on the source value together with each persona reference and
+happens in the extraction domain.",
+"nullable": true
+},
+"sourceUri": {
+"type": "string",
+"description": "Deep link to the structured record in the source system.",
+"format": "uri",
+"nullable": true
+},
+"title": {
+"type": "string",
+"description": "Best human-readable label for the record when the source exposes one.",
+"nullable": true
+},
+"summary": {
+"type": "string",
+"description": "Optional generated or source-provided synopsis of the record.",
+"nullable": true
+},
+"textContent": {
+"type": "string",
+"description": "Flattened textual representation of the most important string fields for retrieval and summarization
+scenarios.",
+"nullable": true
+},
+"status": {
+"type": "string",
+"description": "Current state of the record when state is meaningful.",
+"nullable": true
+},
+"createdAt": {
+"type": "string",
+"description": "Timestamp describing when the record was created.",
+"format": "date-time",
+"nullable": true
+},
+"updatedAt": {
+"type": "string",
+"description": "Timestamp describing the most recent update to the record.",
+"format": "date-time",
+"nullable": true
+},
+"containerRef": {
+"type": "string",
+"description": "Reference to the project, service, event, repository, organization, or other grouping context for the
+record.",
+"nullable": true
+},
+"metadataJson": {
+"type": "string",
+"description": "JSON-serialized source-specific attributes that should remain outside the canonical structured
+surface.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Field-driven business object whose primary value lies in its structured attributes rather than prose or
+event chronology."
+},
+"UpdateContentV3Request": {
+"required": [
+"acls",
+"data",
+"entityType",
+"sourceUri"
+],
+"type": "object",
+"properties": {
+"sourceUri": {
+"type": "string",
+"description": "The absolute URI of the content item in the upstream system.",
+"format": "uri"
+},
+"acls": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/AccessControlListGrant"
+},
+"description": "The access control entries that define who can view the content."
+},
+"entityType": {
+"type": "string",
+"description": "The source-specific entity type for this content item, such as 'markdown-file' or 'message'."
+},
+"data": {
+"$ref": "#/components/schemas/ArchetypeContentEnvelope"
+},
+"hierarchy": {
+"type": "string",
+"description": "The optional absolute URI-shaped container hierarchy for this content item.",
+"format": "uri",
+"nullable": true
+},
+"hierarchySegments": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ContentHierarchySegment"
+},
+"description": "Optional root-to-leaf containers with stable IDs and display names. Requires a matching hierarchy URI.
+If omitted, stored segments are preserved only while the hierarchy path is unchanged.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Request body for updating an existing content record from a Dimension Registry archetype payload."
+},
+"WorkItemArchetype": {
+"required": [
+"title",
+"workItemType",
+"status",
+"createdAt",
+"openedByPersonaRef",
+"assigneeRefs",
+"sourceUri"
+],
+"type": "object",
+"properties": {
+"title": {
+"type": "string",
+"description": "Short summary or primary human-readable description of the work item.",
+"nullable": true
+},
+"workItemType": {
+"type": "string",
+"description": "High-level workflow classification such as issue, incident, request, task, change, approval, or
+problem.",
+"nullable": true
+},
+"status": {
+"type": "string",
+"description": "Current lifecycle state of the work item.",
+"nullable": true
+},
+"createdAt": {
+"type": "string",
+"description": "Timestamp describing when the work item was created.",
+"format": "date-time",
+"nullable": true
+},
+"openedByPersonaRef": {
+"type": "string",
+"description": "Observed external identifier in the source system for the persona that reported, requested, or created
+the work item. Resolution to a persona is based on the source value together with this persona reference and happens in
+the extraction domain.",
+"nullable": true
+},
+"assigneeRefs": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"description": "Observed external identifiers in the source system for current owners, assignees, or responders.
+Resolution to personas is based on the source value together with each persona reference and happens in the extraction
+domain.",
+"nullable": true
+},
+"sourceUri": {
+"type": "string",
+"description": "Deep link to the work item in the source system.",
+"format": "uri",
+"nullable": true
+},
+"descriptionText": {
+"type": "string",
+"description": "Long-form description, body text, or normalized rich-text content explaining the work item.",
+"nullable": true
+},
+"priority": {
+"type": "string",
+"description": "Urgency or importance value supplied by the source system.",
+"nullable": true
+},
+"updatedAt": {
+"type": "string",
+"description": "Timestamp describing the most recent source-side update to the work item.",
+"format": "date-time",
+"nullable": true
+},
+"dueAt": {
+"type": "string",
+"description": "Due date or target completion timestamp when the source tracks one.",
+"format": "date-time",
+"nullable": true
+},
+"resolution": {
+"type": "string",
+"description": "Resolution code, closure note, or final outcome for the work item.",
+"nullable": true
+},
+"labelsJson": {
+"type": "string",
+"description": "JSON-serialized collection of tags, components, or other categorization labels.",
+"nullable": true
+},
+"containerRef": {
+"type": "string",
+"description": "Reference to the project, board, service, repository, or space that owns the work item.",
+"nullable": true
+},
+"messageRefsJson": {
+"type": "string",
+"description": "JSON-serialized collection of related comments, reviews, or discussion entries.",
+"nullable": true
+},
+"metadataJson": {
+"type": "string",
+"description": "JSON-serialized source-specific workflow metadata such as severity, sprint, milestone, SLA, or custom
+fields.",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Trackable unit of work whose lifecycle, ownership, and completion state are central to its meaning."
+},
+"DsrAccessRequest": {
+"description": "The DSR access request.",
+"type": "object",
+"required": [
+"email"
+],
+"additionalProperties": false,
+"properties": {
+"email": {
+"description": "The email address associated with the data subject for the DSR access request.",
+"type": "string",
+"format": "string",
+"nullable": false,
+"example": "someone@stackoverflow.com"
+}
+}
+},
+"DsrAccessResponse": {
+"description": "The DSR access response.",
+"type": "object",
+"required": [
+"exists"
+],
+"additionalProperties": false,
+"properties": {
+"exists": {
+"description": "Whether matching data exists.",
+"type": "boolean",
+"nullable": false
+},
+"messages": {
+"description": "Additional messages.",
+"type": "array",
+"items": {
+"type": "string"
+},
+"nullable": true
+},
+"emails": {
+"description": "Email addresses.",
+"type": "string",
+"nullable": true
+},
+"ips": {
+"description": "IP addresses.",
+"type": "string",
+"nullable": true
+},
+"names": {
+"description": "Names.",
+"type": "string",
+"nullable": true
+},
+"locations": {
+"description": "Locations.",
+"type": "string",
+"nullable": true
+},
+"addresses": {
+"description": "Street addresses.",
+"type": "string",
+"nullable": true
+},
+"cities": {
+"description": "Cities.",
+"type": "string",
+"nullable": true
+},
+"states": {
+"description": "States or regions.",
+"type": "string",
+"nullable": true
+},
+"countries": {
+"description": "Countries.",
+"type": "string",
+"nullable": true
+},
+"postalCodes": {
+"description": "Postal codes.",
+"type": "string",
+"nullable": true
+},
+"companyNames": {
+"description": "Company names.",
+"type": "string",
+"nullable": true
+},
+"titles": {
+"description": "Job titles.",
+"type": "string",
+"nullable": true
+},
+"cookies": {
+"description": "Cookie values.",
+"type": "string",
+"nullable": true
+},
+"aboutMe": {
+"description": "About-me content.",
+"type": "string",
+"nullable": true
+},
+"urls": {
+"description": "URLs.",
+"type": "string",
+"nullable": true
+},
+"phones": {
+"description": "Phone numbers.",
+"type": "string",
+"nullable": true
+},
+"mobilePhones": {
+"description": "Mobile phone numbers.",
+"type": "string",
+"nullable": true
+},
+"userIds": {
+"description": "User IDs.",
+"type": "string",
+"nullable": true
+},
+"accountIds": {
+"description": "Account IDs.",
+"type": "string",
+"nullable": true
+},
+"anonymousAccount": {
+"description": "Whether the account is anonymous.",
+"type": "boolean",
+"nullable": true
+},
+"notes": {
+"description": "Additional notes.",
+"type": "string",
+"nullable": true
+}
+}
+},
+"DsrExportRequest": {
+"description": "The DSR export request.",
+"type": "object",
+"required": [
+"email"
+],
+"additionalProperties": false,
+"properties": {
+"email": {
+"description": "The email address associated with the data subject for the DSR access request.",
+"type": "string",
+"format": "string",
+"nullable": false,
+"example": "someone@stackoverflow.com"
+}
+}
+},
+"DsrExportResponse": {
+"description": "The DSR export response.",
+"type": "object",
+"required": [
+"exists"
+],
+"additionalProperties": false,
+"properties": {
+"exists": {
+"description": "Whether matching data exists.",
+"type": "boolean",
+"nullable": false
+},
+"messages": {
+"description": "Additional messages.",
+"type": "array",
+"items": {
+"type": "string"
+},
+"nullable": true
+},
+"dataSchema": {
+"description": "URI of the exported data schema.",
+"type": "string",
+"format": "uri",
+"nullable": true
+},
+"data": {
+"description": "Exported data.",
+"type": "object",
+"required": [],
+"additionalProperties": true,
+"nullable": true
+}
+}
+},
+"DsrEraseRequest": {
+"description": "The DSR erase request.",
+"type": "object",
+"required": [
+"email"
+],
+"additionalProperties": false,
+"properties": {
+"email": {
+"description": "The email address associated with the data subject for the DSR access request.",
+"type": "string",
+"format": "string",
+"nullable": false,
+"example": "someone@stackoverflow.com"
+}
+}
+},
+"DsrEraseResponse": {
+"description": "The DSR erase response.",
+"type": "object",
+"required": [
+"exists"
+],
+"additionalProperties": false,
+"properties": {
+"exists": {
+"description": "Whether matching data exists.",
+"type": "boolean",
+"nullable": false
+},
+"messages": {
+"description": "Additional messages.",
+"type": "array",
+"items": {
+"type": "string"
+},
+"nullable": true
+}
+}
+},
+"GetNodesByIdsRequest": {
+"description": "The request for retrieving persisted nodes by node ID.",
+"type": "object",
+"required": [
+"nodeIds"
+],
+"additionalProperties": false,
+"properties": {
+"nodeIds": {
+"description": "Node IDs to retrieve. Duplicates are ignored.",
+"type": "array",
+"items": {
+"type": "string",
+"format": "uuid"
+},
+"minItems": 1,
+"maxItems": 100,
+"nullable": false,
+"example": [
+"9588aca8-8995-4c14-a11f-fb442f2bc67c",
+"bd1d2fa1-5169-42c3-bb42-3c020b56417f"
+]
+}
+}
+},
+"GetNodesByIdsResponse": {
+"description": "The response containing matching persisted nodes.",
+"type": "object",
+"required": [
+"nodes"
+],
+"additionalProperties": false,
+"properties": {
+"nodes": {
+"description": "The matching nodes keyed by node ID. Missing requested IDs are omitted.",
+"type": "object",
+"additionalProperties": {
+"$ref": "#/components/schemas/Node"
+},
+"nullable": false
+}
+}
+},
+"SearchRequest": {
+"description": "The request for searching indexed nodes.",
+"type": "object",
+"required": [
+"query",
+"limit"
+],
+"additionalProperties": false,
+"properties": {
+"query": {
+"description": "The search query, which must contain at least one non-whitespace character.",
+"type": "string",
+"nullable": false,
+"minLength": 1,
+"maxLength": 5000,
+"example": "SSO troubleshooting"
+},
+"algorithm": {
+"description": "The search algorithm to use.",
+"type": "string",
+"nullable": true,
+"enum": [
+"lexical_v1",
+"semantic_v1",
+"hybrid_v1"
+],
+"default": "hybrid_v1"
+},
+"limit": {
+"description": "The number of results to return.",
+"type": "integer",
+"format": "int32",
+"minimum": 1,
+"maximum": 100,
+"default": 10,
+"nullable": false
+},
+"scopeIds": {
+"description": "The scope IDs to filter search results by.",
+"type": "array",
+"items": {
+"type": "string",
+"format": "uuid"
+},
+"nullable": true
+}
+}
+},
+"SearchResponse": {
+"description": "The response containing search results.",
+"type": "object",
+"required": [
+"hasIndexedNodes",
+"results",
+"total",
+"userAclGrants"
+],
+"additionalProperties": false,
+"properties": {
+"hasIndexedNodes": {
+"description": "Indicates whether the tenant search index is available for node search. This is false only when the
+tenant index does not exist. When this is true and results is empty, the index exists but either contains no indexed
+nodes or no nodes matched the query.",
+"type": "boolean",
+"nullable": false
+},
+"results": {
+"description": "The search results.",
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/SearchResult"
+},
+"minItems": 0,
+"nullable": false
+},
+"total": {
+"description": "Total number of matching nodes.",
+"type": "integer",
+"format": "int32",
+"minimum": 0,
+"nullable": false
+},
+"userAclGrants": {
+"description": "The ACL grant tags resolved for the requesting user. Each string is a JSON array containing the subject
+provider, kind, and external ID.",
+"type": "array",
+"items": {
+"type": "string"
+},
+"nullable": false
+}
+}
+},
+"SearchResult": {
+"description": "A single search hit and its relevance score.",
+"type": "object",
+"required": [
+"node",
+"score"
+],
+"additionalProperties": false,
+"properties": {
+"node": {
+"$ref": "#/components/schemas/Node"
+},
+"score": {
+"description": "Relative relevance score (higher is better).",
+"type": "number",
+"format": "double",
+"nullable": false
+}
+}
+},
+"CreateNodeSnapshotRequest": {
+"description": "An idempotent tenant node snapshot request.",
+"type": "object",
+"required": [
+"requestId"
+],
+"additionalProperties": false,
+"properties": {
+"requestId": {
+"description": "Caller-owned idempotency identifier, normally the Trust onboarding-cycle ID.",
+"type": "string",
+"format": "uuid",
+"nullable": false
+}
+}
+},
+"CreateNodeSnapshotResponse": {
+"description": "The accepted snapshot request identity and current state.",
+"type": "object",
+"required": [
+"requestId",
+"snapshotId",
+"status"
+],
+"additionalProperties": false,
+"properties": {
+"requestId": {
+"type": "string",
+"format": "uuid",
+"nullable": false
+},
+"snapshotId": {
+"type": "string",
+"format": "uuid",
+"nullable": false
+},
+"status": {
+"type": "string",
+"enum": [
+"queued",
+"processing",
+"published",
+"failed"
+],
+"nullable": false
+}
+}
+},
+"ReprocessResponse": {
+"description": "The result of a reprocess request.",
+"type": "object",
+"required": [
+"totalFetched",
+"totalProcessed",
+"pages",
+"nextCursor"
+],
+"additionalProperties": false,
+"properties": {
+"totalFetched": {
+"description": "Total number of source content items fetched from ContentIngestion.",
+"type": "integer",
+"format": "int32",
+"minimum": 0,
+"nullable": false
+},
+"totalProcessed": {
+"description": "Total number of source content items processed into nodes.",
+"type": "integer",
+"format": "int32",
+"minimum": 0,
+"nullable": false
+},
+"pages": {
+"description": "Total number of ContentIngestion pages fetched.",
+"type": "integer",
+"format": "int32",
+"minimum": 0,
+"nullable": false
+},
+"nextCursor": {
+"description": "Opaque cursor to resume reprocessing from, or null when there are no more items.",
+"type": "string",
+"nullable": true
+}
+}
+},
+"DeveloperRemoveTenantNodeDataRequest": {
+"description": "The request for removing all node data for one or more tenants.",
+"type": "object",
+"required": [
+"tenantIds"
+],
+"additionalProperties": false,
+"properties": {
+"tenantIds": {
+"description": "Tenant IDs to remove. Duplicates are ignored.",
+"type": "array",
+"items": {
+"type": "string",
+"format": "uuid"
+},
+"minItems": 1,
+"nullable": false,
+"example": [
+"00000000-0000-4000-8000-000000000123",
+"00000000-0000-4000-8000-000000000456"
+]
+}
+}
+},
+"DeveloperRemoveTenantNodeDataResponse": {
+"description": "The result of removing tenant node data.",
+"type": "object",
+"required": [
+"tenants"
+],
+"additionalProperties": false,
+"properties": {
+"tenants": {
+"description": "Per-tenant deletion results.",
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/DeveloperRemoveTenantNodeDataTenantResponse"
+},
+"minItems": 0,
+"nullable": false
+}
+}
+},
+"DeveloperRemoveTenantNodeDataTenantResponse": {
+"description": "The deletion result for a single tenant.",
+"type": "object",
+"required": [
+"tenantId",
+"deletedNodes",
+"indexNames"
+],
+"additionalProperties": false,
+"properties": {
+"tenantId": {
+"description": "Tenant ID.",
+"type": "string",
+"format": "uuid",
+"nullable": false
+},
+"deletedNodes": {
+"description": "Number of deleted node rows.",
+"type": "integer",
+"format": "int32",
+"minimum": 0,
+"nullable": false
+},
+"indexNames": {
+"description": "Elasticsearch indices deleted for the tenant.",
+"type": "array",
+"items": {
+"type": "string"
+},
+"minItems": 0,
+"nullable": false
+}
+}
+},
+"Node": {
+"description": "A persisted node.",
+"type": "object",
+"required": [
+"nodeId",
+"text",
+"classificationSignals",
+"creationMetadata",
+"ingestionMetadata",
+"relations",
+"deleted",
+"tenantId",
+"contentId",
+"trustDimension"
+],
+"additionalProperties": false,
+"properties": {
+"nodeId": {
+"description": "Node ID.",
+"type": "string",
+"format": "uuid",
+"nullable": false
+},
+"text": {
+"description": "The node text.",
+"type": "string",
+"nullable": false
+},
+"externalSourceUrl": {
+"description": "Human-resolvable URL of this node at its external source system. Distinct from
+`ingestionMetadata.source` (the system name, e.g. \"stackinternalcommunity\") and `ingestionMetadata.sourceId` (the
+source's internal identifier, e.g. \"5\") — this is the link a human would follow to read the original content. Null
+when the source does not expose a stable URL.",
+"type": "string",
+"format": "uri",
+"nullable": true
+},
+"classificationSignals": {
+"description": "Signals used to classify the node.",
+"type": "array",
+"items": {
+"type": "string"
+},
+"minItems": 0,
+"nullable": false
+},
+"creationMetadata": {
+"$ref": "#/components/schemas/CreationMetadata"
+},
+"ingestionMetadata": {
+"$ref": "#/components/schemas/IngestionMetadata"
+},
+"documentDimension": {
+"nullable": true,
+"allOf": [
+{
+"$ref": "#/components/schemas/DocumentDimension"
+}
+]
+},
+"trustDimension": {
+"$ref": "#/components/schemas/TrustDimension"
+},
+"explicitUserEngagementDimension": {
+"nullable": true,
+"allOf": [
+{
+"$ref": "#/components/schemas/ExplicitUserEngagementDimension"
+}
+]
+},
+"relations": {
+"description": "Relations with other nodes.",
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/NodeRelation"
+},
+"minItems": 0,
+"nullable": false
+},
+"deleted": {
+"description": "Whether the node is deleted.",
+"type": "boolean",
+"nullable": false,
+"example": false
+},
+"tenantId": {
+"description": "Tenant ID",
+"type": "string",
+"format": "uuid",
+"nullable": false
+},
+"contentId": {
+"description": "Content ID.",
+"type": "string",
+"nullable": false
+}
+}
+},
+"Author": {
+"description": "Author information.",
+"type": "object",
+"required": [
+"userId",
+"internalUserId"
+],
+"additionalProperties": false,
+"properties": {
+"userId": {
+"description": "The external user ID.",
+"type": "string",
+"nullable": false
+},
+"internalUserId": {
+"description": "The internal user ID.",
+"type": "string",
+"nullable": false
+}
+}
+},
+"CreationMetadata": {
+"description": "Creation metadata for the node.",
+"type": "object",
+"required": [
+"createdAt"
+],
+"additionalProperties": false,
+"properties": {
+"author": {
+"$ref": "#/components/schemas/Author",
+"nullable": true
+},
+"createdAt": {
+"description": "When the content was created.",
+"type": "string",
+"format": "date-time",
+"nullable": false
+},
+"editedAt": {
+"description": "When the content was last edited.",
+"type": "string",
+"format": "date-time",
+"nullable": true
+}
+}
+},
+"DocumentDimension": {
+"description": "Document-specific metadata.",
+"type": "object",
+"required": [],
+"additionalProperties": false,
+"properties": {
+"title": {
+"description": "The document title.",
+"type": "string",
+"nullable": true
+}
+}
+},
+"ExplicitUserEngagementDimension": {
+"description": "Explicit user engagement data from the source system.",
+"type": "object",
+"required": [],
+"additionalProperties": false,
+"properties": {
+"score": {
+"description": "The source-system score.",
+"type": "integer",
+"format": "int32",
+"nullable": true
+},
+"views": {
+"description": "The source-system view count.",
+"type": "integer",
+"format": "int32",
+"nullable": true
+}
+}
+},
+"IngestionMetadata": {
+"description": "Ingestion metadata for the node.",
+"type": "object",
+"required": [
+"source",
+"sourceId",
+"ingestedAt",
+"ingestedBy"
+],
+"additionalProperties": false,
+"properties": {
+"source": {
+"$ref": "#/components/schemas/ContentSource"
+},
+"sourceId": {
+"description": "The source identifier.",
+"type": "string",
+"nullable": false
+},
+"archetypeType": {
+"description": "The content archetype type, when extracted from an archetype payload.",
+"type": "string",
+"nullable": true
+},
+"archetypeVersion": {
+"description": "The content archetype version, when extracted from an archetype payload.",
+"type": "string",
+"nullable": true
+},
+"sourceContext": {
+"$ref": "#/components/schemas/SourceContext"
+},
+"ingestedAt": {
+"description": "When the node was ingested.",
+"type": "string",
+"format": "date-time",
+"nullable": false
+},
+"ingestedBy": {
+"description": "Who ingested the node.",
+"type": "string",
+"nullable": false
+}
+}
+},
+"NodeRelation": {
+"description": "A relation between two nodes.",
+"type": "object",
+"required": [
+"type",
+"sourceNodeId",
+"targetNodeId"
+],
+"additionalProperties": false,
+"properties": {
+"type": {
+"$ref": "#/components/schemas/NodeRelationType"
+},
+"sourceNodeId": {
+"description": "The source node ID.",
+"type": "string",
+"format": "uuid",
+"nullable": false
+},
+"targetNodeId": {
+"description": "The target node ID.",
+"type": "string",
+"format": "uuid",
+"nullable": false
+},
+"isAccepted": {
+"description": "For answer/question relations, the accepted state of the answer participating in the relation.",
+"type": "boolean",
+"nullable": true
+}
+}
+},
+"NodeRelationType": {
+"description": "The Node relation type.",
+"type": "string",
+"enum": [
+"QuestionTo",
+"AnswerTo",
+"ReplyTo",
+"HasReply",
+"ParentTo",
+"ChildOf",
+"Contains",
+"ContainedBy",
+"InConversation",
+"HasMessage",
+"SmeAdjustment"
+]
+},
+"ContentSource": {
+"description": "The content source.",
+"type": "string",
+"pattern": "^[a-zA-Z0-9\\-]+\\z"
+},
+"SourceContext": {
+"description": "Context about the source.",
+"type": "object",
+"required": [
+"id",
+"name"
+],
+"additionalProperties": false,
+"properties": {
+"id": {
+"description": "The source context ID.",
+"type": "string",
+"nullable": false
+},
+"name": {
+"description": "The source context name.",
+"type": "string",
+"nullable": false
+}
+}
+},
+"TrustDimension": {
+"description": "Trust evaluation data.",
+"type": "object",
+"required": [
+"score",
+"evaluatorVersion",
+"assignedAt"
+],
+"additionalProperties": false,
+"properties": {
+"score": {
+"description": "The trust score from 0.00 to 1.00.",
+"type": "number",
+"format": "double",
+"minimum": 0,
+"maximum": 1,
+"nullable": false
+},
+"evaluatorVersion": {
+"description": "Version of the trust evaluator.",
+"type": "string",
+"nullable": false
+},
+"assignedAt": {
+"description": "When the trust score was assigned.",
+"type": "string",
+"format": "date-time",
+"nullable": false
+}
+}
+},
+"knowledge.ProblemDetails": {
+"description": "Information about a request error.",
+"type": "object",
+"required": [
+"type",
+"title",
+"status"
+],
+"additionalProperties": false,
+"properties": {
+"type": {
+"description": "A URI reference that identifies the problem type.",
+"type": "string",
+"minLength": 4,
+"maxLength": 200,
+"nullable": false
+},
+"title": {
+"description": "A short, human-readable summary of the problem type.",
+"type": "string",
+"minLength": 4,
+"maxLength": 100,
+"nullable": false
+},
+"status": {
+"description": "The HTTP status code generated by the origin server for this occurrence of the problem.",
+"type": "integer",
+"format": "int32",
+"minimum": 100,
+"maximum": 600,
+"nullable": false
+},
+"detail": {
+"description": "A human-readable explanation specific to this occurrence of the problem.",
+"type": "string",
+"minLength": 4,
+"maxLength": 1000,
+"nullable": true
+},
+"instance": {
+"description": "A URI reference that identifies the specific occurrence of the problem.",
+"type": "string",
+"minLength": 4,
+"maxLength": 2000,
+"nullable": true
+},
+"errors": {
+"description": "Validation errors associated with the request.",
+"type": "object",
+"required": [],
+"additionalProperties": {
+"$ref": "#/components/schemas/ProblemDetailsValidationError"
+},
+"nullable": true
+}
+}
+},
+"ProblemDetailsValidationError": {
+"description": "Information about a request input validation error.",
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"ChangeUserRoleRequest": {
+"type": "object",
+"properties": {
+"role": {
+"type": "string",
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "Request to set a workspace member's role."
+},
+"OAuthApplicationRequest": {
+"type": "object",
+"properties": {
+"name": {
+"type": "string",
+"nullable": true
+},
+"description": {
+"type": "string",
+"nullable": true
+},
+"redirectUris": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"nullable": true
+},
+"scopes": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"nullable": true
+}
+},
+"additionalProperties": false,
+"description": "The full definition of an OAuth application: sent on both create and replace."
+},
+"OAuthApplicationResponse": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"nullable": true
+},
+"clientId": {
+"type": "string",
+"nullable": true
+},
+"name": {
+"type": "string",
+"nullable": true
+},
+"description": {
+"type": "string",
+"nullable": true
+},
+"redirectUris": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"nullable": true
+},
+"scopes": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"nullable": true
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+},
+"updatedAt": {
+"type": "string",
+"format": "date-time"
+}
+},
+"additionalProperties": false,
+"description": "A registered OAuth application, including its generated client ID."
+},
+"OAuthApplicationScopeOptionResponse": {
+"type": "object",
+"properties": {
+"slug": {
+"type": "string",
+"nullable": true
+},
+"name": {
+"type": "string",
+"nullable": true
+},
+"description": {
+"type": "string",
+"nullable": true
+},
+"resourceTypeSlug": {
+"type": "string",
+"nullable": true
+},
+"system": {
+"type": "boolean"
+}
+},
+"additionalProperties": false,
+"description": "A scope an OAuth application may request, as offered in the workspace scope catalogue."
+},
+"OAuthApplicationSortField": {
+"enum": [
+"clientId",
+"name",
+"redirectUris",
+"scopes"
+],
+"type": "string",
+"description": "Fields the OAuth application list can be sorted by."
+},
+"OAuthApplicationsListResponse": {
+"type": "object",
+"properties": {
+"items": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/OAuthApplicationResponse"
+},
+"nullable": true
+},
+"page": {
+"type": "integer",
+"format": "int32"
+},
+"pageSize": {
+"type": "integer",
+"format": "int32"
+},
+"totalCount": {
+"type": "integer",
+"format": "int64"
+}
+},
+"additionalProperties": false,
+"description": "A page of the workspace OAuth applications, with the total count across all pages."
+},
+"SortDirection": {
+"enum": [
+"asc",
+"desc"
+],
+"type": "string",
+"description": "Sort order: ascending or descending."
+},
+"UserListItemResponse": {
+"type": "object",
+"properties": {
+"userId": {
+"type": "string",
+"format": "uuid"
+},
+"email": {
+"type": "string",
+"nullable": true
+},
+"firstName": {
+"type": "string",
+"nullable": true
+},
+"lastName": {
+"type": "string",
+"nullable": true
+},
+"role": {
+"type": "string",
+"nullable": true
+},
+"isActive": {
+"type": "boolean"
+}
+},
+"additionalProperties": false,
+"description": "A user as it appears in a workspace user list, including their denormalized role slug."
+},
+"UserListItemResponsePagedResult": {
+"type": "object",
+"properties": {
+"items": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/UserListItemResponse"
+},
+"nullable": true
+},
+"page": {
+"type": "integer",
+"format": "int32"
+},
+"pageSize": {
+"type": "integer",
+"format": "int32"
+},
+"totalCount": {
+"type": "integer",
+"format": "int64"
+}
+},
+"additionalProperties": false,
+"description": "A single page of results plus the total count across all pages (for the given filters)."
+},
+"UserSearchRequest": {
+"type": "object",
+"properties": {
+"page": {
+"type": "integer",
+"description": "The one-based page number. Values below one are treated as one.",
+"format": "int32",
+"nullable": true
+},
+"pageSize": {
+"type": "integer",
+"description": "The number of results per page, from 1 through 100.",
+"format": "int32",
+"nullable": true
+},
+"q": {
+"type": "string",
+"description": "Optional text filter, matched against name and email.",
+"nullable": true
+},
+"role": {
+"type": "string",
+"description": "Optional exact role filter.",
+"nullable": true
+},
+"status": {
+"type": "string",
+"description": "Optional active-state filter. Accepted values are active or deactivated.",
+"nullable": true
+},
+"userIds": {
+"type": "array",
+"items": {
+"type": "string",
+"format": "uuid"
+},
+"description": "Optional user IDs to include.",
+"nullable": true
+},
+"sort": {
+"$ref": "#/components/schemas/UserSortField"
+},
+"direction": {
+"$ref": "#/components/schemas/SortDirection"
+}
+},
+"additionalProperties": false,
+"description": "Request to search workspace members with optional filters, sorting, and pagination."
+},
+"UserSortField": {
+"enum": [
+"name",
+"email",
+"role"
+],
+"type": "string",
+"description": "Fields the user list can be sorted by. \"Name\" sorts on first + last name."
+}
+},
+"securitySchemes": {
+"identity": {
+"type": "oauth2",
+"flows": {
+"authorizationCode": {
+"authorizationUrl": "https://si-identity.int.stackinternal.com/swagger/authorize",
+"tokenUrl": "https://si-identity.int.stackinternal.com/swagger/token",
+"scopes": {}
+}
+}
+},
+"bearerAuth": {
+"type": "http",
+"description": "Manual JWT entry for development and troubleshooting.",
+"scheme": "bearer",
+"bearerFormat": "JWT"
+},
+"oauth2": {
+"type": "oauth2",
+"flows": {
+"authorizationCode": {
+"authorizationUrl": "authorize",
+"tokenUrl": "token",
+"scopes": {}
+}
+}
+}
+}
+}
+}
